@@ -1,5 +1,9 @@
 ---
 
+import {Contact, db} from "astro:db"
+
+const contacts = await db.select().from(Contact);
+console.log(contacts)
 ---
 
 <html lang="en">
@@ -11,6 +15,9 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+	<h1>holo</h1>
+		{contacts.map((element) => (
+			<p>{JSON.stringify(element)}</p>
+		))}
 	</body>
 </html>
