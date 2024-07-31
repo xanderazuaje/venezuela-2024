@@ -15,8 +15,6 @@ const regions = regions_arr.sort((a, b)=>{
 })
 const reg: string | null = Astro.url.searchParams.get("reg") ?? null
 const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
-
-const filter = await db.selectDistinct({type: Contact.type}).from(Contact).where(eq(Contact.region, reg))
 ---
 
 <html lang="en">
