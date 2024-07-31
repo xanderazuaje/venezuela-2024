@@ -40,9 +40,9 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 			</h2>
 			<hr class="bg-black h-[0.5px] border-0"/>
 			<div class="grid grid-cols-1 gap-y-[25px] py-[30px] mx-[30px] sm:grid-cols-3 md:grid-cols-5">
-				<a class={`block uppercase button ${reg === null ? 'selected' : ''}`} href='/'>Todos</a>
+				<a class={`block uppercase button text-center ${reg === null ? 'selected' : ''}`} href='/'>Todos</a>
 				{regions.map(({region}) => (
-					<a class={`block uppercase button ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
+					<a class={`block uppercase button text-center ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
 				))
 				}
 			</div>
