@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  @apply text-gray-900;
+}
+.selected {
+  @apply text-red-500;
+}
+
+.selected-btn {
+  @apply bg-gray-200 text-black;
+}
+
+.btn {
+  @apply py-2 px-4 rounded-2xl cursor-pointer;
+}
