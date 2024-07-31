@@ -3,8 +3,6 @@ import "@fontsource/inter"
 import "@fontsource/inter/800.css"
 import {Contact, db, eq} from "astro:db"
 import Filter from "../components/Filter.tsx"
-import {Image} from "astro:assets"
-import mlvLogo from "../img/mlv_logo.png"
 
 const regions_arr = await db.selectDistinct({region: Contact.region}).from(Contact)
 const regions = regions_arr.sort((a, b)=>{
@@ -57,7 +55,7 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 	</div>
 	<footer class="flex flex-col sm:flex-row items-center m-auto w-fit gap-[30px] pb-[60px]">
 		<span class="text-[20px]">Hecho con el apoyo de</span>
-		<Image src={mlvLogo} alt="Movimiento Libertario de Venezuela" class="w-[100px] "/>
+		<img src="/mlv_logo.png" alt="Movimiento Libertario de Venezuela" class="w-[100px] "/>
 	</footer>
 	</body>
 </html>
