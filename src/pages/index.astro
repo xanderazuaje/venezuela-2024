@@ -1,7 +1,6 @@
 ---
 import "@fontsource/inter"
 import "@fontsource/inter/800.css"
-import Vzla from "../components/Vzla.astro"
 import {Contact, db, eq} from "astro:db"
 import Filter from "../components/Filter.tsx"
 
@@ -26,28 +25,30 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 		<title>Astro</title>
 	</head>
 	<body>
-	<header class="flex items-center w-full justify-between">
-		<h1 class="font-bold text-[50px] w-[608px] leading-[60px]">Todo lo que necesitas saber sobre tu país. Venezuela.</h1>
-		<Vzla/>
-	</header>
-	<section class="w-full">
-		<h2 class="text-[30px]">
-			Encuentra la última informacíon de tu estado.
-		</h2>
-		<hr class="bg-black h-[0.5px] border-0"/>
-		<div class="grid grid-cols-5 gap-y-[25px] py-[30px]">
-			<a class={`block uppercase button ${reg === null ? 'selected' : ''}`} href='/'>nacional</a>
-			{regions.map(({region}) => (
-				<a class={`block uppercase button ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
-			))
-			}
-		</div>
-		<hr class="bg-black h-[1px] border-0"/>
-	</section>
-	<section class="py-[60px]">
-		<h2 class="text-center font-bold text-[30px]">{reg ? reg.toUpperCase() : 'NACIONAL'}</h2>
-		<Filter client:load elements={contacts} />
-	</section>
+	<div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
+		<header class="flex flex-col sm:flex-row items-center w-full justify-between">
+			<h1 class="font-bold text-[50px] max-w-[608px] leading-[60px]">Todo lo que necesitas saber sobre tu país. Venezuela.</h1>
+			<img src="/vzla.svg"/>
+		</header>
+		<section class="w-full">
+			<h2 class="text-[30px]">
+				Encuentra la última informacíon de tu estado.
+			</h2>
+			<hr class="bg-black h-[0.5px] border-0"/>
+			<div class="grid grid-cols-1 gap-y-[25px] py-[30px] mx-[30px] sm:grid-cols-3 md:grid-cols-5">
+				<a class={`block uppercase button ${reg === null ? 'selected' : ''}`} href='/'>nacional</a>
+				{regions.map(({region}) => (
+					<a class={`block uppercase button ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
+				))
+				}
+			</div>
+			<hr class="bg-black h-[1px] border-0"/>
+		</section>
+		<section class="py-[60px]">
+			<h2 class="text-center font-bold text-[30px]">{reg ? reg.toUpperCase() : 'NACIONAL'}</h2>
+			<Filter client:load elements={contacts} />
+		</section>
+	</div>
 	</body>
 </html>
 
