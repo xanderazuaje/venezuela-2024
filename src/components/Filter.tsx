@@ -11,7 +11,7 @@ export default function Filter({elements}: Props) {
 
     return (
         <>
-        <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[25px] items-center">
+        <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[20px] items-center">
             <button onClick={() => setFilter(null)} class={`block btn cursor-pointer ${filter === null ? 'selected-btn' : ''}`}>Todos</button>
             {options.map(({type}) => (
                 <>
