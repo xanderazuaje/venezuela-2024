@@ -28,7 +28,7 @@ export default function Filter({elements}: Props) {
                     <p class="capitalize text-center text-[20px] font-bold">{e.name}</p>
                     <div class="flex gap-[10px] m-auto">
                         <img src="/phone.svg" alt=""/>
-                        <a href={`tel:${e.phone}`} class="block text-[#D00B27] font-sans font-bold">{e.phone}</a>
+                        <a href={`tel:+58${e.phone}`} class="block text-[#D00B27] font-sans font-bold">+58-{e.phone}</a>
                     </div>
                     <p class="text-center">{e.description}</p>
                     <div>
