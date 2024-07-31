@@ -2,16 +2,16 @@
 import "@fontsource/inter"
 import "@fontsource/inter/800.css"
 import {Contact, db, eq} from "astro:db"
-import Filter from "../components/Filter.tsx"
+import Footer from "@/components/Footer.tsx"
+import Navbar from "@/components/Navbar.tsx"
+import Hero from "@/components/Hero.tsx"
+import Contacts from "@/components/ContactList.tsx"
+import States from "@/components/States.tsx"
+import Layout from "@/layouts/Layout.astro"
+import { sortRegion } from "@/utils/sortRegion"
 
 const regions_arr = await db.selectDistinct({region: Contact.region}).from(Contact)
-const regions = regions_arr.sort((a, b)=>{
-	if (a.region < b.region)
-		return -1
-	if (a.region > b.region)
-		return 1;
-	return 0;
-})
+const regions = sortRegion(regions_arr)
 const reg: string | null = Astro.url.searchParams.get("reg") ?? null
 const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
 ---
@@ -25,48 +25,13 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 		<title>Venezuela Help 2024</title>
 	</head>
 	<body>
-	<div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
-		<nav class="flex gap-[40px] font-bold">
-			<a href="/">Recursos y asistencia</a>
-			<a href="/" class="opacity-50 pointer-events-none cursor-not-allowed">Boletín</a>
-		</nav>
-		<header class="flex flex-col sm:flex-row items-center w-full justify-between">
-			<h1 class="font-bold text-[50px] max-w-[608px] leading-[60px]">Todo lo que necesitas saber sobre tu país. Venezuela.</h1>
-			<img src="/vzla.svg"/>
-		</header>
-		<section class="w-full">
-			<h2 class="text-[30px]">
-				Encuentra la última información de tu estado.
-			</h2>
-			<hr class="bg-black h-[0.5px] border-0"/>
-			<div class="grid grid-cols-1 gap-y-[25px] py-[30px] mx-[30px] sm:grid-cols-3 md:grid-cols-5">
-				<a class={`block uppercase button text-center ${reg === null ? 'selected' : ''}`} href='/'>Todos</a>
-				{regions.map(({region}) => (
-					<a class={`block uppercase button text-center ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
-				))
-				}
-			</div>
-			<hr class="bg-black h-[1px] border-0"/>
-		</section>
-		<section class="py-[60px]">
-			<h2 class="text-center font-bold text-[30px]">{reg ? reg.toUpperCase() : 'TODOS'}</h2>
-			<Filter client:load elements={contacts} />
-		</section>
-	</div>
-	<footer class="flex flex-col sm:flex-row items-center m-auto w-fit gap-[30px] pb-[60px] flex-wrap justify-center">
-		<span class="text-[20px]">Hecho con el apoyo de</span>
-		<img src="/mlv_logo.png" alt="Movimiento Libertario de Venezuela" class="w-[100px] "/>
-		<p class="w-full text-center">Contacto: <a href="mailto:venezuelahelp2024@proton.me" class="text-[#D00B27]">venezuelahelp2024@proton.me</a></p>
-	</footer>
+		<Layout>
+			<Navbar />
+			<Hero />
+			<States regions={regions} reg={reg} />
+			<Contacts client:load contacts={contacts} reg={reg} />
+			<Footer />
+	</Layout>
 	</body>
 </html>
-
-<style>
-	body {
-		color: #080808;
-	}
-	.selected {
-		color: #D00B27;
-	}
-</style>
 
