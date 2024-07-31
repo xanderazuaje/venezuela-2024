@@ -8,7 +8,6 @@ const Contact = defineTable({
     name: column.text(),
     type: column.text(),
     description: column.text({optional: true}),
-    phone: column.number(),
     phoneNum: column.text({default: ""}),
     region: column.text(),
     telegram: column.text({optional: true}),
