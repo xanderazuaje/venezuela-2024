@@ -3,6 +3,8 @@ import "@fontsource/inter"
 import "@fontsource/inter/800.css"
 import {Contact, db, eq} from "astro:db"
 import Filter from "../components/Filter.tsx"
+import {Image} from "astro:assets"
+import mlvLogo from "../img/mlv_logo.png"
 
 const regions_arr = await db.selectDistinct({region: Contact.region}).from(Contact)
 const regions = regions_arr.sort((a, b)=>{
@@ -26,6 +28,10 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 	</head>
 	<body>
 	<div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
+		<nav class="flex gap-[40px] font-bold">
+			<a href="/">Recursos y asistencia</a>
+			<a href="/" class="opacity-50 pointer-events-none cursor-not-allowed">Boletín</a>
+		</nav>
 		<header class="flex flex-col sm:flex-row items-center w-full justify-between">
 			<h1 class="font-bold text-[50px] max-w-[608px] leading-[60px]">Todo lo que necesitas saber sobre tu país. Venezuela.</h1>
 			<img src="/vzla.svg"/>
@@ -49,6 +55,10 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 			<Filter client:load elements={contacts} />
 		</section>
 	</div>
+	<footer class="flex flex-col sm:flex-row items-center m-auto w-fit gap-[30px] pb-[60px]">
+		<span class="text-[20px]">Hecho con el apoyo de</span>
+		<Image src={mlvLogo} alt="Movimiento Libertario de Venezuela" class="w-[100px] "/>
+	</footer>
 	</body>
 </html>
 
