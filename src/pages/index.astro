@@ -1,9 +1,22 @@
 ---
+import "@fontsource/inter"
+import "@fontsource/inter/800.css"
+import Vzla from "../components/Vzla.astro"
+import {Contact, db, eq} from "astro:db"
+import Filter from "../components/Filter.tsx"
 
-import {Contact, db} from "astro:db"
+const regions_arr = await db.selectDistinct({region: Contact.region}).from(Contact)
+const regions = regions_arr.sort((a, b)=>{
+	if (a.region < b.region)
+		return -1
+	if (a.region > b.region)
+		return 1;
+	return 0;
+})
+const reg: string | null = Astro.url.searchParams.get("reg") ?? null
+const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
 
-const contacts = await db.select().from(Contact);
-console.log(contacts)
+const filter = await db.selectDistinct({type: Contact.type}).from(Contact).where(eq(Contact.region, reg))
 ---
 
 <html lang="en">
@@ -15,9 +28,37 @@ console.log(contacts)
 		<title>Astro</title>
 	</head>
 	<body>
-	<h1>holo</h1>
-		{contacts.map((element) => (
-			<p>{JSON.stringify(element)}</p>
-		))}
+	<header class="flex items-center w-full justify-between">
+		<h1 class="font-bold text-[50px] w-[608px] leading-[60px]">Todo lo que necesitas saber sobre tu país. Venezuela.</h1>
+		<Vzla/>
+	</header>
+	<section class="w-full">
+		<h2 class="text-[30px]">
+			Encuentra la última informacíon de tu estado.
+		</h2>
+		<hr class="bg-black h-[0.5px] border-0"/>
+		<div class="grid grid-cols-5 gap-y-[25px] py-[30px]">
+			<a class={`block uppercase button ${reg === null ? 'selected' : ''}`} href='/'>nacional</a>
+			{regions.map(({region}) => (
+				<a class={`block uppercase button ${region === reg ? 'selected' : ''}`} href=`?reg=${region.replace(' ', '+')}`>{region}</a>
+			))
+			}
+		</div>
+		<hr class="bg-black h-[1px] border-0"/>
+	</section>
+	<section class="py-[60px]">
+		<h2 class="text-center font-bold text-[30px]">{reg ? reg.toUpperCase() : 'NACIONAL'}</h2>
+		<Filter client:load elements={contacts} />
+	</section>
 	</body>
 </html>
+
+<style>
+	body {
+		color: #080808;
+	}
+	.selected {
+		color: #D00B27;
+	}
+</style>
+
