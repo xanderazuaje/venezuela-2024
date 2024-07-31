@@ -3,7 +3,6 @@ import "./Filter.css"
 
 type Props = {
     elements: Array<any>,
-    options: Array<any>
 }
 
 export default function Filter({elements}: Props) {
