@@ -1,7 +1,6 @@
 ---
 import "@fontsource/inter"
 import "@fontsource/inter/800.css"
-import {Contact, db, eq} from "astro:db"
 import Footer from "@/components/Footer.tsx"
 import Navbar from "@/components/Navbar.tsx"
 import Hero from "@/components/Hero.tsx"
@@ -11,29 +10,22 @@ import Layout from "@/layouts/Layout.astro"
 import { sortRegion } from "@/utils/sortRegion"
 import { type RegionProps } from "@/interfaces/region.interface"
 import { type ContactProps } from "@/interfaces/contact.interface"
+import {supabase} from "../lib/supabase";
 
-const regions_arr : RegionProps[] = await db.selectDistinct({region: Contact.region}).from(Contact)
-const regions = sortRegion(regions_arr)
+const regions_arr = (await supabase.from("Contact").select("region"))["data"] ?? []
+const regions = [... new Set(sortRegion(regions_arr).map((e) => e.region))]
 const reg: string | null = Astro.url.searchParams.get("reg") ?? null
-const contacts : ContactProps[] = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
+const contact_query = reg
+	? await supabase.from("Contact").select(`*`).eq('region', reg)
+	: await supabase.from("Contact").select(`*`)
+const contacts = contact_query["data"]
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Venezuela Help 2024</title>
-	</head>
-	<body>
-		<Layout>
-			<Navbar />
-			<Hero />
-			<States regions={regions} reg={reg} />
-			<Contacts client:load contacts={contacts} reg={reg} />
-			<Footer />
-		</Layout>
-	</body>
-</html>
+<Layout title="Venezuela Help 2024">
+	<Navbar />
+	<Hero />
+	<States regions={regions} reg={reg} />
+	<Contacts client:load contacts={contacts} reg={reg} />
+	<Footer />
+</Layout>
 

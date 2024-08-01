@@ -1,11 +1,9 @@
-import type { RegionProps } from "@/interfaces/region.interface";
-
-type StatesProps = {
-  regions: RegionProps[];
+type Props = {
+  regions: Array<string>;
   reg: string | null;
 };
 
-const States = ({ regions, reg }: StatesProps) => {
+const States = ({ regions, reg }: Props) => {
   return (
     <section class="w-full">
       <h2 class="text-3xl">Encuentra la última información de tu estado.</h2>
@@ -17,7 +15,7 @@ const States = ({ regions, reg }: StatesProps) => {
         >
           Todos
         </a>
-        {regions.map(({ region }) => (
+        {regions.map((region) => (
           <a
             href={`?reg=${region.replace(" ", "+")}`}
             class={`block uppercase button text-center ${

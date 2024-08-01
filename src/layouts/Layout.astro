@@ -1,4 +1,18 @@
-<div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
-  <slot />
-</div>
+---
+const {title} = Astro.props
+---
 
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
+      <slot />
+    </div>
+  </body>
+</html>
