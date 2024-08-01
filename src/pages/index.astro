@@ -17,11 +17,22 @@ const reg = Astro.url.searchParams.get("reg") ?? null
 const contacts = await getContactList(reg)
 ---
 
-<Layout title="Venezuela Help 2024">
-	<Navbar />
-	<Hero />
-	<States regions={regions} reg={reg} />
-	<Contacts client:load contacts={contacts} reg={reg} />
-	<Footer />
-</Layout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Venezuela Help 2024</title>
+	</head>
+	<body>
+		<Layout>
+			<Navbar />
+			<Hero />
+			<States regions={regions} reg={reg} />
+			<Contacts client:load contacts={contacts} reg={reg} />
+			<Footer />
+	</Layout>
+	</body>
+</html>
 
