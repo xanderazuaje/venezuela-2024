@@ -8,15 +8,13 @@ import Contacts from "@/components/ContactList.tsx"
 import States from "@/components/States.tsx"
 import Layout from "@/layouts/Layout.astro"
 import { sortRegion } from "@/utils/sortRegion"
-import {supabase} from "../lib/supabase";
-
-const regions_arr = (await supabase.from("Contact").select("region"))["data"] ?? []
-const regions = [... new Set(sortRegion(regions_arr).map((e) => e.region))]
-const reg: string | null = Astro.url.searchParams.get("reg") ?? null
-const contact_query = reg
-	? await supabase.from("Contact").select(`*`).eq('region', reg)
-	: await supabase.from("Contact").select(`*`)
-const contacts = contact_query["data"]
+import {getContactList} from "@/services/getContactList"
+import {getRegionList} from "@/services/getRegionList"
+ 
+const regions_arr = await getRegionList()	
+const regions = [...new Set(sortRegion(regions_arr).map((e) => e.region))]
+const reg = Astro.url.searchParams.get("reg") ?? null
+const contacts = await getContactList(reg)
 ---
 
 <Layout title="Venezuela Help 2024">

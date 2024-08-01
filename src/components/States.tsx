@@ -1,18 +1,16 @@
-type Props = {
-  regions: Array<string>;
+type StatesProps = {
+  regions: string[];
   reg: string | null;
 };
 
-const States = ({ regions, reg }: Props) => {
+const States = ({ regions, reg }: StatesProps) => {
   return (
     <section class="w-full">
-      <h2 class="text-[30px]">Encuentra la última información de tu estado.</h2>
-      <hr class="bg-black h-[0.5px] border-0" />
-      <div class="grid grid-cols-1 gap-y-[25px] py-[30px] mx-[30px] sm:grid-cols-3 md:grid-cols-5">
+      <h2 class="text-3xl">Encuentra la última información de tu estado.</h2>
+      <hr class="bg-gray-700 h-[1px] border-0" />
+      <div class="grid grid-cols-1 gap-y-6 py-7 mx-7 sm:grid-cols-3 md:grid-cols-5">
         <a
-          class={`block uppercase button text-center ${
-            reg === null ? "selected" : ""
-          }`}
+          class={`block uppercase button text-center ${!reg && "text-red-500"}`}
           href="/"
         >
           Todos
@@ -21,15 +19,14 @@ const States = ({ regions, reg }: Props) => {
           <a
             href={`?reg=${region.replace(" ", "+")}`}
             class={`block uppercase button text-center ${
-              region === reg ? "selected" : ""
+              region === reg && "text-red-500"
             }`}
           >
             {region}
           </a>
         ))}
       </div>
-
-      <hr class="bg-black h-[1px] border-0" />
+      <hr class="bg-gray-700 h-[1px] border-0" />
     </section>
   );
 };

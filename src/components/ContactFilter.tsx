@@ -1,14 +1,16 @@
 import { useState } from "preact/hooks";
 import "@/index.css";
+import type { ContactProps } from "@/interfaces/contact.interface";
 
-type Props = {
-  elements: Array<any>;
+type ContactFilterProps = {
+  contacts: ContactProps[];
 };
 
-export default function Filter({ elements }: Props) {
-  const [filter, setFilter] = useState(null);
+const ContactFilter = ({ contacts }: ContactFilterProps) => {
+  const [filter, setFilter] = useState<string | null>(null);
+
   const options = [
-    ...new Map(elements.map((item) => [item["service"], item])).values(),
+    ...new Map(contacts.map((item) => [item.service, item])).values(),
   ];
 
   return (
@@ -16,8 +18,8 @@ export default function Filter({ elements }: Props) {
       <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[20px] items-center">
         <button
           onClick={() => setFilter(null)}
-          class={`block btn cursor-pointer ${
-            filter === null ? "selected-btn" : ""
+          class={`py-2 px-4 rounded-2xl cursor-pointer ${
+            !filter && "bg-gray-200 text-black"
           }`}
         >
           Todos
@@ -27,8 +29,8 @@ export default function Filter({ elements }: Props) {
             <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`block btn cursor-pointer capitalize ${
-                filter === service ? "selected-btn" : ""
+              class={`py-2 px-4 rounded-2xl cursor-pointer capitalize ${
+                filter === service && "bg-gray-200 text-black"
               }`}
             >
               {service}
@@ -37,7 +39,7 @@ export default function Filter({ elements }: Props) {
         ))}
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[30px]">
-        {elements
+        {contacts
           .filter(({ service }) => service === filter || filter === null)
           .map((e) => (
             <div class="flex flex-col justify-center">
@@ -66,4 +68,6 @@ export default function Filter({ elements }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default ContactFilter;

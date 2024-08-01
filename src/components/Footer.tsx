@@ -9,10 +9,7 @@ const Footer = () => {
       />
       <p class="w-full text-center">
         Contacto
-        <a
-          href="mailto:venezuelahelp2024@proton.me"
-          class="text-[#D00B27] ml-1"
-        >
+        <a href="mailto:venezuelahelp2024@proton.me" class="text-red-600 ml-1">
           venezuelahelp2024@proton.me
         </a>
       </p>
