@@ -3,6 +3,7 @@ node_modules
 dist
 .astro
 .env
+.wrangler
 package-lock.json
 yarn.lock
 pnpm-lock.yaml

@@ -8,5 +8,9 @@ import preact from "@astrojs/preact";
 export default defineConfig({
     integrations: [tailwind(), preact()],
     output: "server",
-    adapter: cloudflare(),
+    adapter: cloudflare({
+        platformProxy: {
+            enabled: true
+        }
+    })
 });
