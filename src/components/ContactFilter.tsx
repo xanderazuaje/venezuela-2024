@@ -1,14 +1,16 @@
 import { useState } from "preact/hooks";
 import "@/index.css";
+import type { ContactProps } from "@/interfaces/contact.interface";
 
-type Props = {
-  elements: Array<any>;
+type ContactFilterProps = {
+  contacts: ContactProps[];
 };
 
-export default function Filter({ elements }: Props) {
-  const [filter, setFilter] = useState(null);
+const ContactFilter = ({ contacts }: ContactFilterProps) => {
+  const [filter, setFilter] = useState<string | null>(null);
+
   const options = [
-    ...new Map(elements.map((item) => [item["type"], item])).values(),
+    ...new Map(contacts.map((item) => [item.type, item])).values(),
   ];
 
   return (
@@ -22,7 +24,7 @@ export default function Filter({ elements }: Props) {
         >
           Todos
         </button>
-        {options.map(({ type }) => (
+        {options.map(({ type }: { type: string }) => (
           <>
             <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
             <button
@@ -37,7 +39,7 @@ export default function Filter({ elements }: Props) {
         ))}
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[30px]">
-        {elements
+        {contacts
           .filter(({ type }) => type === filter || filter === null)
           .map((e) => (
             <div class="flex flex-col justify-center">
@@ -66,4 +68,6 @@ export default function Filter({ elements }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default ContactFilter;
