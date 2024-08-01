@@ -9,11 +9,13 @@ import Contacts from "@/components/ContactList.tsx"
 import States from "@/components/States.tsx"
 import Layout from "@/layouts/Layout.astro"
 import { sortRegion } from "@/utils/sortRegion"
+import { type RegionProps } from "@/interfaces/region.interface"
+import { type ContactProps } from "@/interfaces/contact.interface"
 
-const regions_arr = await db.selectDistinct({region: Contact.region}).from(Contact)
+const regions_arr : RegionProps[] = await db.selectDistinct({region: Contact.region}).from(Contact)
 const regions = sortRegion(regions_arr)
 const reg: string | null = Astro.url.searchParams.get("reg") ?? null
-const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
+const contacts : ContactProps[] = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
 ---
 
 <html lang="en">
@@ -31,7 +33,7 @@ const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, 
 			<States regions={regions} reg={reg} />
 			<Contacts client:load contacts={contacts} reg={reg} />
 			<Footer />
-	</Layout>
+		</Layout>
 	</body>
 </html>
 
