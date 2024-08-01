@@ -12,11 +12,13 @@
   "dependencies": {
     "@astrojs/check": "^0.8.3",
     "@astrojs/cloudflare": "^11.0.1",
-    "@astrojs/db": "^0.12.0",
     "@astrojs/preact": "^3.5.1",
     "@astrojs/tailwind": "^5.1.0",
+    "@auth/core": "^0.32.0",
     "@fontsource/inter": "^5.0.19",
+    "@supabase/supabase-js": "^2.45.0",
     "astro": "^4.12.3",
+    "auth-astro": "^4.1.2",
     "preact": "^10.23.1",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.4"

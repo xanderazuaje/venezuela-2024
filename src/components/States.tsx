@@ -1,5 +1,5 @@
 type Props = {
-  regions: Array<any>;
+  regions: Array<string>;
   reg: string | null;
 };
 
@@ -17,7 +17,7 @@ const States = ({ regions, reg }: Props) => {
         >
           Todos
         </a>
-        {regions.map(({ region }) => (
+        {regions.map((region) => (
           <a
             href={`?reg=${region.replace(" ", "+")}`}
             class={`block uppercase button text-center ${

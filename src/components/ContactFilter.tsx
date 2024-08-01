@@ -8,7 +8,7 @@ type Props = {
 export default function Filter({ elements }: Props) {
   const [filter, setFilter] = useState(null);
   const options = [
-    ...new Map(elements.map((item) => [item["type"], item])).values(),
+    ...new Map(elements.map((item) => [item["service"], item])).values(),
   ];
 
   return (
@@ -22,28 +22,28 @@ export default function Filter({ elements }: Props) {
         >
           Todos
         </button>
-        {options.map(({ type }) => (
+        {options.map(({ service }) => (
           <>
             <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
             <button
-              onClick={() => setFilter(type)}
+              onClick={() => setFilter(service)}
               class={`block btn cursor-pointer capitalize ${
-                filter === type ? "selected-btn" : ""
+                filter === service ? "selected-btn" : ""
               }`}
             >
-              {type}
+              {service}
             </button>
           </>
         ))}
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[30px]">
         {elements
-          .filter(({ type }) => type === filter || filter === null)
+          .filter(({ service }) => service === filter || filter === null)
           .map((e) => (
             <div class="flex flex-col justify-center">
               <img
-                src={`/${e.type}.svg`}
-                alt={e.type}
+                src={`/${e.service}.svg`}
+                alt={e.service}
                 class="w-[60px] m-auto"
               />
               <p class="capitalize text-center">{e.region}</p>
@@ -53,10 +53,10 @@ export default function Filter({ elements }: Props) {
               <div class="flex gap-[10px] m-auto">
                 <img src="/phone.svg" alt="" />
                 <a
-                  href={`tel:${e.phoneNum}`}
+                  href={`tel:+${e.phone}`}
                   class="block text-[#D00B27] font-sans font-bold underline"
                 >
-                  {e.phoneNum}
+                  +{e.phone}
                 </a>
               </div>
               <p class="text-center">{e.description}</p>
