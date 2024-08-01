@@ -1,6 +1,4 @@
 ---
-import "@fontsource/inter"
-import "@fontsource/inter/800.css"
 import Footer from "@/components/Footer.tsx"
 import Navbar from "@/components/Navbar.tsx"
 import Hero from "@/components/Hero.tsx"
@@ -16,7 +14,7 @@ const regions = [...new Set(sortRegion(regions_arr).map((e) => e.region))]
 const reg = Astro.url.searchParams.get("reg") ?? null
 const contacts = await getContactList(reg)
 ---
-<Layout>
+<Layout title="Venezuela Help 2024">
 	<Navbar />
 	<Hero />
 	<States regions={regions} reg={reg} />
