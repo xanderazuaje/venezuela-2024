@@ -22,6 +22,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "wrangler": "^3.68.0"
   }
 }
