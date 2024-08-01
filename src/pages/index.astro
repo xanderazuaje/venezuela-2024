@@ -16,22 +16,11 @@ const reg: string | null = Astro.url.searchParams.get("reg") ?? null
 const contacts = reg ? await db.select().from(Contact).where(eq(Contact.region, reg)) : await db.select().from(Contact)
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Venezuela Help 2024</title>
-	</head>
-	<body>
-		<Layout>
-			<Navbar />
-			<Hero />
-			<States regions={regions} reg={reg} />
-			<Contacts client:load contacts={contacts} reg={reg} />
-			<Footer />
-	</Layout>
-	</body>
-</html>
+<Layout title="Venezuela Help 2024">
+	<Navbar />
+	<Hero />
+	<States regions={regions} reg={reg} />
+	<Contacts client:load contacts={contacts} reg={reg} />
+	<Footer />
+</Layout>
 
