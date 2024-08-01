@@ -10,7 +10,7 @@ import Layout from "@/layouts/Layout.astro"
 import { sortRegion } from "@/utils/sortRegion"
 import {supabase} from "../lib/supabase";
 
-const regions_arr = (await supabase.from("Contact").select("region"))["data"]
+const regions_arr = (await supabase.from("Contact").select("region"))["data"] ?? []
 const regions = [... new Set(sortRegion(regions_arr).map((e) => e.region))]
 const reg: string | null = Astro.url.searchParams.get("reg") ?? null
 const contact_query = reg
