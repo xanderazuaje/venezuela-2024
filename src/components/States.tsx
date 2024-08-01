@@ -1,9 +1,9 @@
-type Props = {
-  regions: Array<string>;
+type StatesProps = {
+  regions: string[];
   reg: string | null;
 };
 
-const States = ({ regions, reg }: Props) => {
+const States = ({ regions, reg }: StatesProps) => {
   return (
     <section class="w-full">
       <h2 class="text-3xl">Encuentra la última información de tu estado.</h2>

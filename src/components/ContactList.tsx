@@ -6,10 +6,10 @@ type ContactListProps = {
   reg: string | null;
 };
 
-const Contacts = ({ contacts, reg }: ContactListProps) => {
+const ContactList = ({ contacts, reg }: ContactListProps) => {
   return (
     <section class="py-16">
-      <h2 class="text-center font-bold text-[30px]">
+      <h2 class="text-center font-bold text-3xl">
         {reg ? reg.toUpperCase() : "TODOS"}
       </h2>
       <ContactFilter contacts={contacts} />
@@ -17,4 +17,4 @@ const Contacts = ({ contacts, reg }: ContactListProps) => {
   );
 };
 
-export default Contacts;
+export default ContactList;

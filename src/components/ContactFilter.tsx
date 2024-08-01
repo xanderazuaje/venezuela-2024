@@ -3,14 +3,14 @@ import "@/index.css";
 import type { ContactProps } from "@/interfaces/contact.interface";
 
 type ContactFilterProps = {
-  contacts: any[];
+  contacts: ContactProps[];
 };
 
 const ContactFilter = ({ contacts }: ContactFilterProps) => {
   const [filter, setFilter] = useState<string | null>(null);
 
   const options = [
-    ...new Map(contacts.map((item) => [item["service"], item])).values(),
+    ...new Map(contacts.map((item) => [item.service, item])).values(),
   ];
 
   return (
@@ -18,8 +18,8 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
       <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[20px] items-center">
         <button
           onClick={() => setFilter(null)}
-          class={`block btn cursor-pointer ${
-            filter === null ? "selected-btn" : ""
+          class={`py-2 px-4 rounded-2xl cursor-pointer ${
+            !filter && "bg-gray-200 text-black"
           }`}
         >
           Todos
@@ -29,8 +29,8 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
             <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`block btn cursor-pointer capitalize ${
-                filter === service ? "selected-btn" : ""
+              class={`py-2 px-4 rounded-2xl cursor-pointer capitalize ${
+                filter === service && "bg-gray-200 text-black"
               }`}
             >
               {service}
