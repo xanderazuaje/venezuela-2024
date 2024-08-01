@@ -6,7 +6,7 @@ import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), preact()],
-  output: "server",
-  adapter: cloudflare(),
+    integrations: [tailwind(), preact()],
+    output: "server",
+    adapter: cloudflare(),
 });
