@@ -1,13 +1,11 @@
 export interface ContactProps {
   id: number;
+  created_at: string;
   name: string;
-  type: string;
-  description: string | null;
-  phone: number;
-  phoneNum: string;
+  service: string;
   region: string;
-  telegram: string | null;
-  instagram: string | null;
-  whatsapp: string | null;
-  twitter: string | null;
+  phone: string;
+  description: string;
+  social: string | null;
+  created_by: string;
 }
