@@ -15,7 +15,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
 
   return (
     <>
-      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[20px] items-center">
+      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[18px] items-center">
         <button
           onClick={() => setFilter(null)}
           class={`py-2 px-4 rounded-2xl cursor-pointer ${
@@ -29,7 +29,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
             <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`py-2 px-4 rounded-2xl cursor-pointer capitalize ${
+              class={`py-2 px-7 rounded-2xl cursor-pointer capitalize ${
                 filter === service && "bg-gray-200 text-black"
               }`}
             >
@@ -38,7 +38,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
           </>
         ))}
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[30px]">
+      <div class="grid grid-cols-1 gap-10 mt-16 sm:grid-cols-2 md:grid-cols-3 md:mt-24 md:gap-16">
         {contacts
           .filter(({ service }) => service === filter || filter === null)
           .map((e) => (
