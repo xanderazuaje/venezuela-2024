@@ -7,10 +7,11 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
     integrations: [tailwind(), preact()],
-    output: "server",
+    output: "hybrid",
     adapter: cloudflare({
         platformProxy: {
             enabled: true
-        }
+        },
+        mode: "directory"
     })
 });
