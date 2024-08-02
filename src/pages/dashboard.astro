@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { supabase } from "../lib/supabase";
+import RowDashboard from "../components/RowDashboard";
+import { supabase } from "@/lib/supabase";
 
 const { cookies, redirect } = Astro;
 
@@ -26,13 +27,21 @@ if (error) {
 
     return redirect("/signin");
 }
-
-const email = data.user?.email;
+const queue = (await supabase.from("Contact_queue").select())["data"];
 ---
-<Layout title="dashboard">
-    <h1>Welcome {email}</h1>
-    <p>We are happy to see you here</p>
-    <form action="/api/auth/signout">
-        <button type="submit">Sign out</button>
-    </form>
+
+<Layout title="Dashboard">
+    <h1 class="mb-14 font-bold text-5xl text-center">Dashboard</h1>
+    <div class="flex flex-col gap-6">
+        <div class="bg-[#ECECEC] font-bold grid-cols-5 grid text-center py-8 px-4 rounded-2xl">
+            <p>Fecha</p>
+            <p>Nombre</p>
+            <p>Estado</p>
+            <p>Telf.</p>
+            <p>Servicio</p>
+        </div>
+        {queue.map((e) => (
+            <RowDashboard data={e} client:only="preact"/>
+        ))}
+    </div>
 </Layout>
