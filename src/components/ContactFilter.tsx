@@ -15,7 +15,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
 
   return (
     <>
-      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[18px] items-center">
+      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[16px] items-center">
         <button
           onClick={() => setFilter(null)}
           class={`py-2 px-4 rounded-2xl cursor-pointer ${
