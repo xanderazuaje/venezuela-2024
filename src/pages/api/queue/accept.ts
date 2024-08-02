@@ -3,12 +3,13 @@ import {supabase} from "@/lib/supabase.ts";
 
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
-        const {id, name, service, region, phone, description, social} = await request.json();
+        const {id, name, email, service, region, phone, description, social} = await request.json();
         const {data} = await supabase.auth.getSession()
         const {error: errorAdd} = await supabase
             .from("Contact")
             .insert({
                 name,
+                email,
                 service,
                 region,
                 phone,

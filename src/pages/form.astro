@@ -1,0 +1,80 @@
+---
+
+import Layout from "../layouts/Layout.astro";
+import Input from "../components/Input.astro";
+
+
+const regions = [
+    "nacional",
+    "internacional",
+    "amazonas",
+    "anzoátegui",
+    "apure",
+    "aragua",
+    "barinas",
+    "bolívar",
+    "carabobo",
+    "cojedes",
+    "delta Amacuro",
+    "falcón",
+    "guárico",
+    "lara",
+    "mérida",
+    "miranda",
+    "monagas",
+    "nueva Esparta",
+    "portuguesa",
+    "sucre",
+    "táchira",
+    "trujillo",
+    "vargas",
+    "yaracuy",
+    "zulia",
+]
+
+const services = [
+    "médico",
+    "psicólogo",
+    "asistencia legal"
+]
+
+---
+<Layout title="Registra tu apoyo">
+    <div class="md:flex">
+        <div class="p-10 border border-[#080808] ">
+            <h1 class="text-center text-2xl mb-5">Formulario de inscripción a Venezuela Help</h1>
+            <form action="/api/register" method="post" class="flex flex-col">
+                <label for="name">Nombre Completo</label>
+                <Input type="text" name="name" id="name" placeholder="Por defecto: [ANÓNIMO]"/>
+                <label for="email">Email</label>
+                <Input type="email" name="email" id="email" placeholder="tucorreo@dominio.com" required/>
+                <label for="phone">Número de teléfono (con código de área)</label>
+                <Input type="tel" name="phone" id="phone" placeholder="+5812345567"/>
+                <label for="region">Estado</label>
+                <select name="region" id="region" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
+                    {regions.map((e) => (
+                        <option value={e}>{e}</option>
+                    ))}
+                </select>
+                <label for="service">Servicio</label>
+                <select name="service" id="service" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
+                    {services.map((e) => (
+                            <option value={e}>{e}</option>
+                    ))}
+                </select>
+                <label for="description">Descripción</label>
+                <Input type="text" name="description" id="description" placeholder="Breve descripción de tus servicios" required/>
+                <hr>
+                <label for="description">Instagram</label>
+                <Input type="text" name="instagram" id="instagram" placeholder="Ejemplo: tuusuario.sinarroba"/>
+                <label for="telegram">Descripción</label>
+                <Input type="text" name="telegram" id="telegram" placeholder="Ejemplo: tuusuario.sinarroba"/>
+                <label for="whatsapp">Descripción</label>
+                <Input type="text" name="whatsapp" id="whatsapp" placeholder="Ejemplo: +581234567"/>
+                <button type="submit" class="bg-[#D00B27] text-white font-bold py-2 px-4 rounded-xl mt-3">Solicitar entrar</button>
+                <a href="/" class="bg-[#ECECEC] font-bold text-center py-2 px-4 rounded-xl mt-3">Volver</a>
+            </form>
+        </div>
+        <img src="/form_image.png" class="w-1/2 object-cover hidden md:block"/>
+    </div>
+</Layout>

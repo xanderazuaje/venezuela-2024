@@ -1,6 +1,5 @@
 ---
 import Footer from "@/components/Footer.tsx"
-import Navbar from "@/components/Navbar.tsx"
 import Hero from "@/components/Hero.tsx"
 import Contacts from "@/components/ContactList.tsx"
 import States from "@/components/States.tsx"
@@ -28,7 +27,6 @@ try {
 }
 ---
 <Layout title="Venezuela Help 2024">
-	<Navbar />
 	<Hero />
 	<States regions={regions} reg={reg} />
 	<Contacts client:load contacts={contacts} reg={reg} />
