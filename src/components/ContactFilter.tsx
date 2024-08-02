@@ -55,10 +55,10 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
               <div class="flex gap-[10px] m-auto">
                 <img src="/phone.svg" alt="" />
                 <a
-                  href={`tel:+${e.phone}`}
+                  href={`tel:${ e.phone.charAt(0) == '+' ? e.phone : '+' + e.phone}`}
                   class="block text-[#D00B27] font-sans font-bold underline"
                 >
-                  +{e.phone}
+                  { e.phone.charAt(0) == '+' ? e.phone : '+' + e.phone}
                 </a>
               </div>
               <p class="text-center">{e.description}</p>
