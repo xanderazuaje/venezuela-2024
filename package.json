@@ -6,12 +6,12 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro check && astro build && wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
     "@astrojs/cloudflare": "^11.0.1",
+    "@astrojs/netlify": "^5.4.0",
     "@astrojs/preact": "^3.5.1",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/inter": "^5.0.19",
