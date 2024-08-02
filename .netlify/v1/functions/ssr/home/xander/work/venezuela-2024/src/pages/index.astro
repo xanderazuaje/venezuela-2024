@@ -1,0 +1,36 @@
+---
+import Footer from "@/components/Footer.tsx"
+import Navbar from "@/components/Navbar.tsx"
+import Hero from "@/components/Hero.tsx"
+import Contacts from "@/components/ContactList.tsx"
+import States from "@/components/States.tsx"
+import Layout from "@/layouts/Layout.astro"
+import { sortRegion } from "@/utils/sortRegion"
+import { getContactList } from "@/services/getContactList"
+import { getRegionList } from "@/services/getRegionList"
+import type {ContactProps} from "../interfaces/contact.interface";
+
+let regions: Array<string> = [];
+let contacts: Array<ContactProps> = [];
+const reg = Astro.url.searchParams.get("reg") ?? null;
+
+try {
+	const regions_arr = await getRegionList();
+	regions = [...new Set(sortRegion(regions_arr).map((e) => e.region))];
+} catch (error) {
+	console.error("Error fetching region list:", error);
+}
+
+try {
+	contacts = await getContactList(reg);
+} catch (error) {
+	console.error("Error fetching contact list:", error);
+}
+---
+<Layout title="Venezuela Help 2024">
+	<Navbar />
+	<Hero />
+	<States regions={regions} reg={reg} />
+	<Contacts client:load contacts={contacts} reg={reg} />
+	<Footer />
+</Layout>
