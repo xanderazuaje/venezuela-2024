@@ -1,14 +1,16 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.SUPABASE_URL
-const key = import.meta.env.SUPABASE_ANON_KEY
+const SUPABASE_URL = import.meta.env.SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.SUPABASE_ANON_KEY;
 
-if (!url)
-    throw new Error("URL is required")
-if (!key)
-    throw new Error("Key is required")
+console.log("Runtime - SUPABASE_URL:", SUPABASE_URL);
+console.log("Runtime - SUPABASE_KEY:", SUPABASE_KEY);
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+    throw new Error('Supabase URL and Key must be set');
+}
 
 export const supabase = createClient(
-    url,
-    key
+    SUPABASE_URL,
+    SUPABASE_KEY
 );

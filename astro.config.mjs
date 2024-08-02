@@ -8,6 +8,11 @@ import preact from "@astrojs/preact";
 export default defineConfig({
     integrations: [tailwind(), preact()],
     output: "server",
+    vite: {
+        define: {
+            ''
+        }
+    }
     adapter: cloudflare({
         mode: "directory"
     })
