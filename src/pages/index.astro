@@ -8,9 +8,10 @@ import Layout from "@/layouts/Layout.astro"
 import { sortRegion } from "@/utils/sortRegion"
 import { getContactList } from "@/services/getContactList"
 import { getRegionList } from "@/services/getRegionList"
+import type {ContactProps} from "../interfaces/contact.interface";
 
-let regions = [];
-let contacts = [];
+let regions: Array<string> = [];
+let contacts: Array<ContactProps> = [];
 const reg = Astro.url.searchParams.get("reg") ?? null;
 
 try {
