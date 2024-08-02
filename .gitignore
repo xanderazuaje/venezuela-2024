@@ -4,6 +4,7 @@ dist
 .astro
 .env
 .wrangler
+.netlify
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
