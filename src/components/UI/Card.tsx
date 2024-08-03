@@ -23,11 +23,11 @@ const Card = ({ contact }: CardProps) => {
     phone.charAt(0) === "+" ? phone : "+" + phone;
 
   return (
-    <div class="flex flex-col justify-center">
+    <div class="w-64 flex flex-col justify-center">
       <img
         src={`/${contact.service}.svg`}
         alt={contact.service}
-        class="w-14 m-auto"
+        class="w-14 mx-auto"
       />
       <p class="capitalize text-center select-none">{contact.region}</p>
       <p
@@ -81,11 +81,11 @@ const Card = ({ contact }: CardProps) => {
         </a>
       </div>
 
-      <div className="max-w-xs mx-auto text-center overflow-hidden md:max-w-2xl">
+      <div className="flex-grow max-w-xs mx-auto text-center overflow-hidden md:max-w-2xl">
         <div className="p-2">
           <div
             ref={contentRef}
-            className={`text-pretty text-sm ${!isExpanded && "line-clamp-2"}`}
+            className={`text-pretty text-sm ${!isExpanded && "line-clamp-3"}`}
           >
             {contact.description}
           </div>
