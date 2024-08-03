@@ -39,7 +39,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
           </>
         ))}
       </div>
-      <div class="grid grid-cols-1 gap-10 mt-16 sm:grid-cols-2 md:grid-cols-3 md:mt-24 md:gap-16">
+      <div class="grid gap-10 mt-16 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:mt-24 md:gap-16">
         {contacts
           .filter(({ service }) => service === filter || filter === null)
           .map((contact) => (
