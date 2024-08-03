@@ -1,6 +1,7 @@
 import { useState } from "preact/hooks";
 import "@/index.css";
 import type { ContactProps } from "@/interfaces/contact.interface";
+import Card from "@/components/UI/Card";
 
 type ContactFilterProps = {
   contacts: ContactProps[];
@@ -26,10 +27,10 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
         </button>
         {options.map(({ service }) => (
           <>
-            <hr class="h-[40px] w-[1px] border-0 bg-black hidden md:block" />
+            <hr class="h-9 w-[1px] border-l border-gray-700 hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`hover:shadow-sm hover:shadow-gray-400 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
+              class={`hover:shadow-sm hover:shadow-gray-300 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
                 filter === service && "bg-gray-200 text-black"
               }`}
             >
@@ -41,29 +42,8 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
       <div class="grid grid-cols-1 gap-10 mt-16 sm:grid-cols-2 md:grid-cols-3 md:mt-24 md:gap-16">
         {contacts
           .filter(({ service }) => service === filter || filter === null)
-          .map((e) => (
-            <div class="flex flex-col justify-center">
-              <img
-                src={`/${e.service}.svg`}
-                alt={e.service}
-                class="w-[60px] m-auto"
-              />
-              <p class="capitalize text-center">{e.region}</p>
-              <p class="capitalize text-center text-[20px] font-bold">
-                {e.name}
-              </p>
-              <div class="flex gap-[10px] m-auto">
-                <img src="/phone.svg" alt="" />
-                <a
-                  href={`tel:${ e.phone.charAt(0) == '+' ? e.phone : '+' + e.phone}`}
-                  class="block text-[#D00B27] font-sans font-bold underline"
-                >
-                  { e.phone.charAt(0) == '+' ? e.phone : '+' + e.phone}
-                </a>
-              </div>
-              <p class="text-center">{e.description}</p>
-              <div></div>
-            </div>
+          .map((contact) => (
+            <Card contact={contact} />
           ))}
       </div>
     </>
