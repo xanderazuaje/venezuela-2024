@@ -40,41 +40,64 @@ const services = [
 
 ---
 <Layout title="Registra tu apoyo">
+    <div>
+        <a href="/" class="underline text-gray-500 md:text-lg hover:text-gray-700">Volver al Inicio</a>
+        <p class="font-extrabold text-center m-8 md:text-2xl">Bienvenido.<br>Gracias a ti, Venezuela es un mejor país</p>
+    </div>
     <div class="md:flex">
         <div class="p-10 border border-[#080808] ">
-            <h1 class="text-center text-2xl mb-5">Formulario de inscripción a Venezuela Help</h1>
-            <form action="/api/register" method="post" class="flex flex-col">
-                <label for="name">Nombre Completo</label>
-                <Input type="text" name="name" id="name" placeholder="Por defecto: [ANÓNIMO]"/>
-                <label for="email">Email</label>
-                <Input type="email" name="email" id="email" placeholder="tucorreo@dominio.com" required/>
-                <label for="phone">Número de teléfono (con código de área)</label>
-                <Input type="tel" name="phone" id="phone" placeholder="+5812345567"/>
-                <label for="region">Estado</label>
-                <select name="region" id="region" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
-                    {regions.map((e) => (
-                        <option value={e}>{e}</option>
-                    ))}
-                </select>
-                <label for="service">Servicio</label>
-                <select name="service" id="service" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
-                    {services.map((e) => (
+            <h1 class="text-center text-1xl mb-5 font-extrabold xl:text-2xl">Formulario de inscripción a Venezuela Help</h1>
+            <form action="/api/register" method="post" class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="name">Nombre Completo</label>
+                    <Input type="text" name="name" id="name" placeholder="Por defecto: [ANÓNIMO]" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="email">Email</label>
+                    <Input type="email" name="email" id="email" placeholder="tucorreo@dominio.com" required />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="phone">Número de teléfono</label>
+                    <Input type="tel" name="phone" id="phone" placeholder="+5812345678" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="region">Estado</label>
+                    <select name="region" id="region" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
+                        {regions.map((e) => (
                             <option value={e}>{e}</option>
-                    ))}
-                </select>
-                <label for="description">Descripción</label>
-                <Input type="text" name="description" id="description" placeholder="Breve descripción de tus servicios" required/>
-                <hr>
-                <label for="description">Instagram</label>
-                <Input type="text" name="instagram" id="instagram" placeholder="Ejemplo: tuusuario.sinarroba"/>
-                <label for="telegram">Descripción</label>
-                <Input type="text" name="telegram" id="telegram" placeholder="Ejemplo: tuusuario.sinarroba"/>
-                <label for="whatsapp">Descripción</label>
-                <Input type="text" name="whatsapp" id="whatsapp" placeholder="Ejemplo: +581234567"/>
-                <button type="submit" class="bg-[#D00B27] text-white font-bold py-2 px-4 rounded-xl mt-3">Solicitar entrar</button>
-                <a href="/" class="bg-[#ECECEC] font-bold text-center py-2 px-4 rounded-xl mt-3">Volver</a>
+                        ))}
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="service">Servicio</label>
+                    <select name="service" id="service" class="border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize">
+                        {services.map((e) => (
+                            <option value={e}>{e}</option>
+                        ))}
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="instagram">Instagram</label>
+                    <Input type="text" name="instagram" id="instagram" placeholder="Ejemplo: tuusuario.sinarroba" />
+                </div>
+            
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="telegram">Telegram</label>
+                    <Input type="text" name="telegram" id="telegram" placeholder="Ejemplo: tuusuario.sinarroba" />
+                </div>
+            
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="whatsapp">WhatsApp</label>
+                    <Input type="text" name="whatsapp" id="whatsapp" placeholder="Ejemplo: +581234567" />
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold" for="description">Descripción</label>
+                    <textarea name="description" id="description" placeholder="Explica cómo es tu servicio y cómo puedes ayudar." class="border rounded-xl px-4 border-\[\#C1C1C1\] py-3"></textarea>
+                </div>
+                <button type="submit" class="bg-[#D00B27] text-white font-semibold py-2 px-4 rounded-xl mt-3">Enviar</button>
             </form>
         </div>
-        <img src="/form_image.png" class="w-1/2 object-cover hidden md:block"/>
+        <img src="/form_image.webp" class="w-1/2 object-cover hidden md:block"/>
     </div>
 </Layout>
