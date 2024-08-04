@@ -30,7 +30,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
             <hr class="h-9 w-[1px] border-l border-gray-700 hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`hover:shadow-sm hover:shadow-gray-300 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
+              class={`hover:bg-gray-200 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
                 filter === service && "bg-gray-200 text-black"
               }`}
             >
