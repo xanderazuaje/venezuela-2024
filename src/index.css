@@ -1,9 +1,21 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
   @apply text-gray-900;
+}
+
+.icon-arrow::after {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  content: "";
+  transform: rotate(-180deg);
+  right: 0.8rem;
+  top: 2.3rem;
+  background-image: url("./public/arrow.svg");
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: 300ms transform ease-in-out;
+}
+
+.icon-arrow:focus-within::after {
+  transform: rotate(0deg);
 }
