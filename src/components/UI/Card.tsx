@@ -32,7 +32,7 @@ const Card = ({ contact }: CardProps) => {
       <p class="capitalize text-center select-none">{contact.region}</p>
       <p
         title={contact.name}
-        className="capitalize text-center text-xl text-pretty font-bold select-none line-clamp-2"
+        className="capitalize text-center text-xl text-pretty font-bold select-none line-clamp-2 md:text-lg xl:text-xl"
       >
         {contact.name}
       </p>
