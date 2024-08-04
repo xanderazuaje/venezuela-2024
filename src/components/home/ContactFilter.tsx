@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
-import "@/index.css";
 import type { ContactProps } from "@/interfaces/contact.interface";
 import Card from "@/components/UI/Card";
+import { useMemo } from "preact/hooks";
 
 type ContactFilterProps = {
   contacts: ContactProps[];
@@ -10,9 +10,9 @@ type ContactFilterProps = {
 const ContactFilter = ({ contacts }: ContactFilterProps) => {
   const [filter, setFilter] = useState<string | null>(null);
 
-  const options = [
-    ...new Map(contacts.map((item) => [item.service, item])).values(),
-  ];
+  const options = useMemo(() => {
+    return [...new Map(contacts.map((item) => [item.service, item])).values()];
+  }, [contacts]);
 
   return (
     <>
