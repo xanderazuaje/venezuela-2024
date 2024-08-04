@@ -8,5 +8,5 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   integrations: [tailwind(), preact()],
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
 });
