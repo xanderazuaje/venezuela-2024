@@ -1,3 +1,18 @@
+* {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #373737 gray;
+}
+
+::-webkit-scrollbar {
+  width: 0.55rem;
+  height: 0.55rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #373737;
+}
+
 body {
   @apply text-gray-900;
 }
@@ -13,9 +28,9 @@ body {
   background-image: url("./public/arrow.svg");
   background-repeat: no-repeat;
   pointer-events: none;
-  transition: 300ms transform ease-in-out;
+  transition: 225ms transform ease-in-out;
 }
 
 .icon-arrow:focus-within::after {
-  transform: rotate(0deg);
+  transform: rotate(0);
 }
