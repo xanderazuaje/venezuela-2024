@@ -5,7 +5,7 @@ const Hero = () => {
         Todo lo que necesitas saber sobre tu país. Venezuela.
       </h1>
         <div class="relative mt-4 md:mt-0">
-            <a href="/form" class="bg-white border-2 border-[#080808] rounded-3xl font-bold block text-center">Soy una ONG/profesional</a>
+            <a href="/form" class="bg-white border-2 border-[#080808] hover:bg-gray-200 rounded-3xl font-bold block text-center md:p-2">Soy una ONG/profesional</a>
             <img src="/vzla.svg" />
         </div>
     </header>
