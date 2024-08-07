@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import {cmsUrl} from "@/constants/cms";
+
+const res = await fetch(`${cmsUrl}/posts`)
+const posts = await res.json()
+---
+
+<Layout title="Venezuela Help - Blog">
+    {
+        posts.docs.map((post) => (
+            <p>{JSON.stringify(post)}</p>
+        ))
+    }
+</Layout>

@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import {cmsUrl} from "@/constants/cms";
+
+const {id} = Astro.params
+const res = await fetch(`${cmsUrl}/categories/${id}`)
+const content = await res.json()
+---
+
+<Layout title="Categorías - Venezuela Help">
+    <p>
+        {JSON.stringify(content)}
+    </p>
+</Layout>
