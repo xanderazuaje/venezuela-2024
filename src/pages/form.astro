@@ -17,16 +17,14 @@ import "intl-tel-input/build/css/intlTelInput.css";
 
   const updatePlaceholder = () => {
     const countryData = iti.getSelectedCountryData();
-    input.setAttribute(
-      "placeholder",
-      "+" +
-        countryData.dialCode +
-        customPlaceholders[
-          countryData.iso2?.toUpperCase() as keyof typeof customPlaceholders
-        ]
-    );
-  };
 
+    const fullNumber =
+      customPlaceholders[
+        countryData.iso2?.toUpperCase() as keyof typeof customPlaceholders
+      ];
+
+    input.setAttribute("placeholder", `+${countryData.dialCode}${fullNumber}`);
+  };
   input.addEventListener("countrychange", updatePlaceholder);
 
   window.addEventListener("load", updatePlaceholder);
@@ -142,3 +140,23 @@ import "intl-tel-input/build/css/intlTelInput.css";
     <img src="/form_image.webp" class="w-1/2 object-cover hidden md:block" />
   </div>
 </Layout>
+
+<style>
+  .icon-arrow::after {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  content: "";
+  transform: rotate(-180deg);
+  right: 0.8rem;
+  top: 2.3rem;
+  background-image: url("./public/arrow.svg");
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: 225ms transform ease-in-out;
+}
+
+.icon-arrow:focus-within::after {
+  transform: rotate(0);
+}
+</style>
