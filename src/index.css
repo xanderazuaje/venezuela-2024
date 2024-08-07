@@ -1,7 +1,16 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #373737 gray;
+}
+
+::-webkit-scrollbar {
+  width: 0.55rem;
+  height: 0.55rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #373737;
 }
 
 body {

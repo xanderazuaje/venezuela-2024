@@ -41,7 +41,7 @@ const Card = ({ contact }: CardProps) => {
         rel="noreferrer"
         title={`Contactar al ${formatPhone(contact.phone)}`}
         href={`tel:${formatPhone(contact.phone)}`}
-        className="text-[#D00B27] text-center underline font-bold my-2"
+        className="text-custom-red text-center underline font-bold my-2"
       >
         <span>{formatPhone(contact.phone)}</span>
       </a>
@@ -51,7 +51,7 @@ const Card = ({ contact }: CardProps) => {
           rel="noreferrer"
           title={`Contactar al ${formatPhone(contact.phone)}`}
           href={`tel:${formatPhone(contact.phone)}`}
-          className="text-[#D00B27] w-10 h-10 flex items-center border border-gray-300 
+          className="text-custom-red w-10 h-10 flex items-center border border-gray-300 
           justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
         >
           <img
@@ -92,7 +92,7 @@ const Card = ({ contact }: CardProps) => {
           {needsClamping && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-[#D00B27] mx-auto cursor-pointer"
+              className="text-custom-red mx-auto cursor-pointer"
             >
               {isExpanded ? "Ver menos" : "Ver más"}
             </button>
