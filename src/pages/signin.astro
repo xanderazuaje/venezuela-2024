@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Input from "../components/Input.astro";
+import Input from "../components/UI/Input.astro";
 
 const { cookies, redirect } = Astro;
 
@@ -8,23 +8,29 @@ const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
 if (accessToken && refreshToken) {
-    return redirect("/dashboard");
+  return redirect("/dashboard");
 }
 ---
 
 <Layout title="Sign in">
-    <div>
-        <h1 class="mb-14 font-bold text-5xl text-center">Log in</h1>
-        <form action="/api/auth/signin" method="post" class="flex flex-col p-16 pt-14 border border-[#080808] rounded-2xl gap-5">
-            <div class="flex flex-col gap-1">
-                <label for="email">Email</label>
-                <Input type="email" name="email" id="email" />
-            </div>
-            <div class="flex flex-col gap-1">
-                <label for="password">Password</label>
-                <Input type="password" name="password" id="password" />
-            </div>
-            <button type="submit" class="bg-[#D00B27] text-white font-bold py-2 px-4 rounded-xl mt-3">Login</button>
-        </form>
+  <h1 class="mb-14 font-bold text-5xl text-center">Log in</h1>
+  <form
+    action="/api/auth/signin"
+    method="post"
+    class="flex flex-col p-16 pt-14 border border-[#080808] rounded-2xl gap-5"
+  >
+    <div class="flex flex-col gap-1">
+      <label for="email">Email</label>
+      <Input type="email" name="email" id="email" />
     </div>
+    <div class="flex flex-col gap-1">
+      <label for="password">Password</label>
+      <Input type="password" name="password" id="password" />
+    </div>
+    <button
+      type="submit"
+      class="bg-custom-red text-white font-bold py-2 px-4 rounded-xl mt-3"
+      >Login</button
+    >
+  </form>
 </Layout>

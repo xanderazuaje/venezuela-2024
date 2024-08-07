@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
-import "@/index.css";
 import type { ContactProps } from "@/interfaces/contact.interface";
 import Card from "@/components/UI/Card";
+import { useMemo } from "preact/hooks";
 
 type ContactFilterProps = {
   contacts: ContactProps[];
@@ -10,9 +10,9 @@ type ContactFilterProps = {
 const ContactFilter = ({ contacts }: ContactFilterProps) => {
   const [filter, setFilter] = useState<string | null>(null);
 
-  const options = [
-    ...new Map(contacts.map((item) => [item.service, item])).values(),
-  ];
+  const options = useMemo(() => {
+    return [...new Map(contacts.map((item) => [item.service, item])).values()];
+  }, [contacts]);
 
   return (
     <>
@@ -30,7 +30,7 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
             <hr class="h-9 w-[1px] border-l border-gray-700 hidden md:block" />
             <button
               onClick={() => setFilter(service)}
-              class={`hover:shadow-sm hover:shadow-gray-300 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
+              class={`hover:bg-gray-200 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
                 filter === service && "bg-gray-200 text-black"
               }`}
             >
