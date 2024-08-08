@@ -1,15 +1,34 @@
 ---
 import Layout from "@/layouts/Layout.astro"
 import {cmsUrl} from "@/constants/cms";
+import Preview from "@/components/blog/Preview.astro";
+import {Post} from "@/payload-types"
 
-const res = await fetch(`${cmsUrl}/posts`)
-const posts = await res.json()
+const res = await fetch(`${cmsUrl}/api/posts`)
+const posts: Array<Post> = (await res.json()).docs
+const highlighted = posts[Math.floor((Math.random() * posts.length))]
+const bannerImgUrl = cmsUrl + highlighted.bannerImage.sizes.tablet.url
 ---
 
 <Layout title="Venezuela Help - Blog">
-    {
-        posts.docs.map((post) => (
-            <p>{JSON.stringify(post)}</p>
-        ))
-    }
+    <div id="highlighted" class="w-full text-white px-6 py-14 flex flex-col gap-5 rounded-3xl relative overflow-hidden">
+        <img src={bannerImgUrl} class="absolute -z-10 left-0 top-0 -translate-y-1/2 brightness-50" alt={highlighted.bannerImage.alt}/>
+        <span class="text-xl">Destacado</span>
+        <h2 class="font-bold text-2xl">{highlighted.title}</h2>
+    </div>
+    <h2 class="text-xl my-5">Artículos Recientes</h2>
+    <section class="grid grid-cols-3 items-stretch">
+        {
+            posts.map((e) => (
+                <Preview
+                    img={e.bannerImage}
+                    title={e.title}
+                    content={e.content}
+                    author={e.author}
+                    date={e.createdAt}
+                    postId={e.id}
+                />
+            ))
+        }
+    </section>
 </Layout>

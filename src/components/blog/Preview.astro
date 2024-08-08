@@ -1,0 +1,32 @@
+---
+const {img, title, content, author, date, postId} = Astro.props
+import {cmsUrl} from "@/constants/cms";
+const descripiton = (e) => {
+    let len: number = 0
+    let lines: number = 0
+    let finalString: string
+
+    while(len < 64 && lines < 3)
+    {
+
+    }
+}
+console.log(content[0])
+---
+
+<a href={"/blog/" + postId} class="block">
+    <article class="flex flex-col gap-6 p-5 hover:bg-[#E4E4E4] rounded-2xl h-full">
+        <img
+            class="rounded-2xl aspect-video object-cover"
+            src={cmsUrl + img.sizes.thumbnail.url}
+            alt={img.alt}/>
+        <div>
+            <h2 class="text-2xl font-bold">{title}</h2>
+            <p class="text-[#838383]">aaaaa</p>
+        </div>
+        <div class="flex justify-between text-sm font-bold mt-auto">
+            <span class="capitalize">{author?.name ?? 'Anónimo'}</span>
+            <span>{new Date(date).toLocaleDateString("es-VE")}</span>
+        </div>
+    </article>
+</a>
