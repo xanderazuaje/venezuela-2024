@@ -1,14 +1,30 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import {cmsUrl} from "@/constants/cms";
+import {Post, Media, User} from "@/payload-types";
+import Serialize from "@/components/blog/PostRichText";
 
 const {id} = Astro.params
-const res = await fetch(`${cmsUrl}/posts/${id}`)
-const content = await res.json()
+const res = await fetch(`${cmsUrl}/api/posts/${id}`)
+const {title, author, createdAt, content, bannerImage}: Post = await res.json()
+
 ---
 
-<Layout title={content.title + ' - Venezuela Help'}>
-    <p>
-        {JSON.stringify(content)}
-    </p>
+<Layout title={title + ' - Venezuela Help'}>
+    <article class="flex flex-col gap-9">
+        <header>
+            <a href="/blog" class="mb-6 block underline text-custom-red text-lg">Volver atrás</a>
+            <img
+                    class="h-[400px] object-cover w-full bg-center"
+                    src={cmsUrl + (bannerImage as Media).url}
+                    alt={(bannerImage as Media).alt}
+            />
+            <h1 class="text-3xl font-bold text-custom-red mt-6">{title}</h1>
+            <span class="font-bold">{(author as User)?.name ?? 'Anónimo'} - {new Date(createdAt).toLocaleDateString("es-VE")}</span>
+        </header>
+        <hr>
+        <div>
+            <Serialize content={content}/>
+        </div>
+    </article>
 </Layout>

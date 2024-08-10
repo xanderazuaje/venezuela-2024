@@ -11,13 +11,13 @@ const bannerImgUrl = cmsUrl + highlighted.bannerImage.sizes.tablet.url
 ---
 
 <Layout title="Venezuela Help - Blog">
-    <div id="highlighted" class="w-full text-white px-6 py-14 flex flex-col gap-5 rounded-3xl relative overflow-hidden">
+    <a href={'/blog/' + highlighted.id} id="highlighted" class="block w-full text-white px-6 py-14 flex flex-col gap-5 rounded-3xl relative overflow-hidden">
         <img src={bannerImgUrl} class="absolute -z-10 left-0 top-0 -translate-y-1/2 brightness-50" alt={highlighted.bannerImage.alt}/>
         <span class="text-xl">Destacado</span>
         <h2 class="font-bold text-2xl">{highlighted.title}</h2>
-    </div>
+    </a>
     <h2 class="text-xl my-5">Artículos Recientes</h2>
-    <section class="grid grid-cols-3 items-stretch">
+    <section class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 items-stretch">
         {
             posts.map((e) => (
                 <Preview
