@@ -46,7 +46,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
       </h1>
       <form action="/api/register" method="post" class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="name">Nombre Completo</label>
+          <label class="font-semibold select-none" for="name"
+            >Nombre Completo</label
+          >
           <Input
             type="text"
             name="name"
@@ -55,7 +57,7 @@ import "intl-tel-input/build/css/intlTelInput.css";
           />
         </div>
         <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="email">Email</label>
+          <label class="font-semibold select-none" for="email">Email</label>
           <Input
             type="email"
             name="email"
@@ -66,13 +68,13 @@ import "intl-tel-input/build/css/intlTelInput.css";
         </div>
         <div class="flex flex-col gap-1">
           <label
-            class="font-semibold after:content-['*'] after:text-custom-red"
+            class="font-semibold select-none after:content-['*'] after:text-custom-red"
             for="phone">Número de teléfono</label
           >
           <Input type="tel" name="phone" id="phone" />
         </div>
-        <div class="icon-arrow relative flex flex-col gap-1">
-          <label class="font-semibold" for="region">Estado</label>
+        <div class="select-container relative flex flex-col gap-1">
+          <label class="font-semibold select-none">Estado</label>
           <select
             name="region"
             id="region"
@@ -81,8 +83,8 @@ import "intl-tel-input/build/css/intlTelInput.css";
             {regions.map((e) => <option value={e}>{e}</option>)}
           </select>
         </div>
-        <div class="icon-arrow relative flex flex-col gap-1">
-          <label class="font-semibold" for="service">Servicio</label>
+        <div class="select-container relative flex flex-col gap-1">
+          <label class="font-semibold">Servicio</label>
           <select
             name="service"
             id="service"
@@ -92,7 +94,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
           </select>
         </div>
         <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="instagram">Instagram</label>
+          <label class="font-semibold select-none" for="instagram"
+            >Instagram</label
+          >
           <Input
             type="text"
             name="instagram"
@@ -102,7 +106,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="telegram">Telegram</label>
+          <label class="font-semibold select-none" for="telegram"
+            >Telegram</label
+          >
           <Input
             type="text"
             name="telegram"
@@ -112,7 +118,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="whatsapp">WhatsApp</label>
+          <label class="font-semibold select-none" for="whatsapp"
+            >WhatsApp</label
+          >
           <Input
             type="text"
             name="whatsapp"
@@ -120,37 +128,39 @@ import "intl-tel-input/build/css/intlTelInput.css";
             placeholder="Ejemplo: +581234567"
           />
         </div>
-             <div class="flex flex-col gap-1">
-                    <label class="font-semibold" for="description">Descripción</label>
-                    <textarea name="description" id="description" placeholder="Explica cómo es tu servicio y cómo puedes ayudar." class="resize-none border border rounded-xl px-4 border-\[\#C1C1C1\] py-3"></textarea>
-                </div>
-         <button
+        <div class="flex flex-col gap-1">
+          <label class="font-semibold select-none" for="description"
+            >Descripción</label
+          >
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Explica cómo es tu servicio y cómo puedes ayudar."
+            class="resize-none border rounded-xl px-4 border-\[\#C1C1C1\] py-3"
+          ></textarea>
+        </div>
+        <button
           type="submit"
           class="bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl mt-3"
           >Enviar</button
         >
-            </form>
-        </div>
+      </form>
+    </div>
     <img src="/form_image.webp" class="w-1/2 object-cover hidden md:block" />
   </div>
 </Layout>
 
 <style>
-  .icon-arrow::after {
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  content: "";
-  transform: rotate(-180deg);
-  right: 0.8rem;
-  top: 2.3rem;
-  background-image: url("./public/arrow.svg");
-  background-repeat: no-repeat;
-  pointer-events: none;
-  transition: 225ms transform ease-in-out;
-}
-
-.icon-arrow:focus-within::after {
-  transform: rotate(0);
-}
+  .select-container::after {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    content: "";
+    transform: rotate(-180deg);
+    right: 0.8rem;
+    top: 2.3rem;
+    background-image: url("/arrow.svg");
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
 </style>
