@@ -28,30 +28,6 @@ import "intl-tel-input/build/css/intlTelInput.css";
   input.addEventListener("countrychange", updatePlaceholder);
 
   window.addEventListener("load", updatePlaceholder);
-
-  // Javascript para icono de flecha del menu de selección
-  // Detecta cuando el usuario interactúa con el teclado para abrir/cerrar el menú
-  document.addEventListener("DOMContentLoaded", () => {
-    const $selectContainer = document.querySelectorAll(".select-container");
-    const $select = document.querySelectorAll(".select-container select");
-
-    if ($selectContainer) {
-      if ($select) {
-        for (let s of $select) {
-          s.addEventListener("focus", () => {
-            for (let d of $selectContainer) d.classList.remove("open");
-          });
-        }
-
-        for (let d of $selectContainer) {
-          d.addEventListener("click", () => {
-            if (d.classList.contains(`open`)) d.classList.remove("open");
-            else d.classList.add("open");
-          });
-        }
-      }
-    }
-  });
 </script>
 
 <Layout title="Registra tu apoyo">
@@ -70,7 +46,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
       </h1>
       <form action="/api/register" method="post" class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
-          <label class="font-semibold select-none" for="name">Nombre Completo</label>
+          <label class="font-semibold select-none" for="name"
+            >Nombre Completo</label
+          >
           <Input
             type="text"
             name="name"
@@ -116,7 +94,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
           </select>
         </div>
         <div class="flex flex-col gap-1">
-          <label class="font-semibold select-none" for="instagram">Instagram</label>
+          <label class="font-semibold select-none" for="instagram"
+            >Instagram</label
+          >
           <Input
             type="text"
             name="instagram"
@@ -126,7 +106,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="font-semibold select-none" for="telegram">Telegram</label>
+          <label class="font-semibold select-none" for="telegram"
+            >Telegram</label
+          >
           <Input
             type="text"
             name="telegram"
@@ -136,7 +118,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="font-semibold select-none" for="whatsapp">WhatsApp</label>
+          <label class="font-semibold select-none" for="whatsapp"
+            >WhatsApp</label
+          >
           <Input
             type="text"
             name="whatsapp"
@@ -145,7 +129,9 @@ import "intl-tel-input/build/css/intlTelInput.css";
           />
         </div>
         <div class="flex flex-col gap-1">
-          <label class="font-semibold select-none" for="description">Descripción</label>
+          <label class="font-semibold select-none" for="description"
+            >Descripción</label
+          >
           <textarea
             name="description"
             id="description"
@@ -176,14 +162,5 @@ import "intl-tel-input/build/css/intlTelInput.css";
     background-image: url("/arrow.svg");
     background-repeat: no-repeat;
     pointer-events: none;
-    transition: 220ms transform ease-in-out;
-  }
-
-  .select-container.open:not(:focus)::after {
-    transform: rotate(-180deg);
-  }
-
-  .select-container.open:focus-within::after {
-    transform: rotate(0);
   }
 </style>
