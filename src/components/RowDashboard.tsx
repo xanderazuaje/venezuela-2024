@@ -26,7 +26,7 @@ const reject = async (data: RowDashboardProps) => {
 const RowDashboard = ({data}: {data: RowDashboardProps}) => {
     const [clicked, setClicked] = useState(false)
     return (
-        <div class={`bg-[${clicked ? "#D00B27" : "#ECECEC"}] ${clicked ? "text-white" : ""} text-center py-8 px-4 rounded-2xl`} onClick={() => {
+        <div class={`${clicked ? "bg-custom-red" : "bg-[#ECECEC]"} ${clicked ? "text-white" : ""} text-center py-8 px-4 rounded-2xl`} onClick={() => {
             setClicked(!clicked)
         }}>
             <div class={`${!clicked ? "grid-cols-5" : "grid-cols-6"} grid items-center`}>
