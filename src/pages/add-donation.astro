@@ -1,3 +1,72 @@
 ---
 
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "@/lib/supabase";
+import Input from "../components/UI/Input.astro";
+
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (!accessToken || !refreshToken) {
+    return redirect("/signin");
+}
+
+const { data, error } = await supabase.auth.setSession({
+    refresh_token: refreshToken.value,
+    access_token: accessToken.value,
+});
+
+if (error) {
+    cookies.delete("sb-access-token", {
+        path: "/",
+    });
+    cookies.delete("sb-refresh-token", {
+        path: "/",
+    });
+
+    return redirect("/signin");
+}
 ---
+<Layout title="Añadir ONG">
+    <h1 class="mb-14 font-bold text-5xl text-center">Añadir ONG para donaciones</h1>
+    <form action="/api/donations/create" method="post" id="donationForm" enctype="multipart/form-data" class="flex flex-col gap-4">
+        <label for="name">Nombre:</label>
+        <Input type="text" id="name" name="name" placeholder="Nombre aquí" required/>
+        <label for="url">URL:</label>
+        <Input type="url" id="url" name="url" placeholder="https://ejemplo.com" required/>
+        <label for="description">Descripción:</label>
+        <Input type="text" id="description" name="description" required/>
+        <label for="picture">Añadir imagen:</label>
+        <Input type="file" id="picture" name="picture" placeholder="Subir imagen" accept="image/*"/>
+        <button
+                type="submit"
+                class="bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl mt-3"
+        >
+            Enviar
+        </button >
+    </form>
+</Layout>
+
+<script>
+    const file = document.getElementById("file") as HTMLInputElement
+    file.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement
+        const alertMsg = document.getElementById('alertMsg')
+        if (target.files && target.files[0].size > 2 * (1024 ** 2))
+        {
+            target.value = null
+            if (!alertMsg)
+            {
+                const alertMsg = document.createElement('span')
+                alertMsg.id = 'alertMsg'
+                alertMsg.className = 'text-custom-red'
+                alertMsg.innerText = 'Archivo demasiado grande'
+                target.parentNode.insertBefore(alertMsg, target.nextSibling)
+            }
+            return
+        }
+        alertMsg.remove()
+    })
+</script>

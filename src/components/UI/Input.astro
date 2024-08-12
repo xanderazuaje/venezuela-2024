@@ -1,5 +1,5 @@
 ---
-const {type, name, id, placeholder, required} = Astro.props
+const {type, name, id, placeholder, required, accept} = Astro.props
 ---
 
-<input type={type} name={name} id={id} placeholder={placeholder} class="w-full border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize appearance-none" required={required} />
+<input type={type} accept={accept} name={name} id={id} placeholder={placeholder} class="w-full border-[#C1C1C1] border rounded-xl py-2 px-4 appearance-none" required={required} />
