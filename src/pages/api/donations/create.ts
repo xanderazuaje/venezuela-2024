@@ -18,7 +18,7 @@ async function imgToWebp(imageFile: Blob): Promise<Buffer> {
 async function uploadImage(imageFile: Blob, fileName: string) {
     const webpImg = await imgToWebp(imageFile);
     const path = `public/${fileName.split('.').slice(0, -1).join('.')}.webp`;
-    const { error } = await supabase
+    const { data, error } = await supabase
         .storage
         .from(bucketName)
         .upload(path, webpImg, {
@@ -32,7 +32,7 @@ async function uploadImage(imageFile: Blob, fileName: string) {
     const { data: { publicUrl } } = supabase
         .storage
         .from(bucketName)
-        .getPublicUrl(path);
+        .getPublicUrl(data?.path);
 
     return publicUrl;
 }
