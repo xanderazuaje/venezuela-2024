@@ -44,11 +44,11 @@ const RowDashboard = ({data}: {data: RowDashboardProps}) => {
                 }
             </div>
             {clicked &&
-                <div class="bg-white text-[#080808] w-full text-left mt-5">
-                    <p>Descripción: {data.description}</p>
-                    {data.social?.instagram && <p>{"Instagram: " + data.social?.instagram}</p>}
-                    {data.social?.telegram && <p>{"Telegram: " + data.social?.telegram}</p>}
-                    {data.social?.whatsapp && <p>{"Whatsapp: " + data.social?.whatsapp}</p>}
+                <div class="bg-white text-[#080808] w-full text-left mt-5 p-5 rounded-2xl">
+                    <p><b>Descripción:</b> {data.description}</p>
+                    {data.social?.instagram && <p><b>Instagram:</b> {data.social?.instagram}</p>}
+                    {data.social?.telegram && <p><b>Telegram:</b> {data.social?.telegram}</p>}
+                    {data.social?.whatsapp && <p><b>Whatsapp:</b> {data.social?.whatsapp}</p>}
                 </div>
             }
         </div>
