@@ -16,6 +16,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/inter": "^5.0.19",
     "@supabase/supabase-js": "^2.45.0",
+    "@types/grecaptcha": "^3.0.9",
     "astro": "^4.12.3",
     "dotenv": "^16.4.5",
     "intl-tel-input": "^23.8.0",
