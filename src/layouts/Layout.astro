@@ -4,6 +4,7 @@ const {title} = Astro.props
 import "@/index.css";
 import "@fontsource/inter"
 import "@fontsource/inter/800.css"
+import Footer from "../components/home/Footer.astro";
 ---
 
 <html lang="es">
@@ -19,5 +20,6 @@ import "@fontsource/inter/800.css"
     <div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
       <slot />
     </div>
+    <Footer/>
   </body>
 </html>
