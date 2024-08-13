@@ -1,0 +1,19 @@
+---
+const {href, type, className} = Astro.props
+---
+{
+    href
+    ? <a
+        href={href}
+        class={"bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl " + className }
+    >
+        <slot/>
+    </a>
+    : <button
+        type={type}
+        class={"bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl " + className }
+    >
+        <slot/>
+    </button>
+    }
+

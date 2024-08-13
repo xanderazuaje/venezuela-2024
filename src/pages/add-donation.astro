@@ -3,6 +3,7 @@
 import Layout from "../layouts/Layout.astro";
 import { supabase } from "@/lib/supabase";
 import Input from "../components/UI/Input.astro";
+import Button from "../components/UI/Button.astro";
 
 const { cookies, redirect } = Astro;
 
@@ -59,12 +60,9 @@ const ngo_types = [
         </div>
         <label for="picture">Añadir imagen:</label>
         <Input type="file" id="picture" name="picture" placeholder="Subir imagen" accept="image/*"/>
-        <button
-                type="submit"
-                class="bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl mt-3"
-        >
+        <Button type="submit" className="mt-3">
             Enviar
-        </button >
+        </Button>
     </form>
 </Layout>
 
