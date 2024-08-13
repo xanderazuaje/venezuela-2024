@@ -1,7 +1,34 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import {NgoProps} from "../interfaces/ngo.interface";
+import {sortNgo} from "../utils/sortNgo";
+import {getActivityList} from "../services/getActivityList";
+import {getNgoList} from "../services/getNgoList";
 
-import Layout from "../layouts/Layout.astro";---
+let activities: string[] = [];
+let ngo_s: NgoProps[] = [];
+const type = Astro.url.searchParams.get("filter") ?? null;
 
-<Layout>
+try {
+    const ngos_arr = await getActivityList();
+    activities = [...new Set(sortNgo(ngos_arr).map((e) => e.type))];
+} catch (error) {
+    console.error("Error fetching region list: ", (error as unknown as Error).message);
+}
 
+try {
+    ngo_s = await getNgoList(type);
+} catch (error) {
+    console.error("Error fetching contact list: ", (error as unknown as Error).message);
+}
+---
+
+<Layout title="Dona a una causa">
+    <header>
+        <div>
+            <h1>Ayúdanos a hacer Venezuela Help accesible a todos.</h1>
+            <p>Apoya el desarrollo de esta plataforma para que más personas puedan contribuir al bienestar de Venezuela.</p>
+            <a href="https://ko-fi.com/venezuelahelp" target="_blank">Dona a Venezuela Help</a>
+        </div>
+    </header>
 </Layout>
