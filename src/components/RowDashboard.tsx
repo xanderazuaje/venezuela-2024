@@ -24,13 +24,14 @@ const reject = async (data: RowDashboardProps) => {
 }
 
 const RowDashboard = ({data}: {data: RowDashboardProps}) => {
+    console.log(data)
     const [clicked, setClicked] = useState(false)
     return (
         <div class={`${clicked ? "bg-custom-red" : "bg-[#ECECEC]"} ${clicked ? "text-white" : ""} text-center py-8 px-4 rounded-2xl`} onClick={() => {
             setClicked(!clicked)
         }}>
             <div class={`${!clicked ? "grid-cols-5" : "grid-cols-6"} grid items-center`}>
-                <p>{data.id}</p>
+                <p>{new Date(data.created_at).toLocaleDateString("es-VE")}</p>
                 <p>{data.name}</p>
                 <p>{data.region}</p>
                 <p>{data.phone}</p>
