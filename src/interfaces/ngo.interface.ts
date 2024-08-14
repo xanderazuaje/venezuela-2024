@@ -3,7 +3,8 @@ export interface NgoProps {
     created_at: string;
     picture: string;
     description: string;
-    string: string;
+    name: string;
+    url: string;
     type: string;
     created_by: string;
 }

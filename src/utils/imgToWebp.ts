@@ -6,8 +6,8 @@ export async function imgToWebp(imageFile: Blob): Promise<Buffer> {
         return await sharp(buffer)
             .webp({quality: 80})
             .resize({
-                width: 300,
-                height: 300,
+                width: 200,
+                height: 200,
             })
             .toBuffer();
     } catch (error) {

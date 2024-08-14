@@ -4,6 +4,8 @@ import {NgoProps} from "../interfaces/ngo.interface";
 import {sortNgo} from "../utils/sortNgo";
 import {getActivityList} from "../services/getActivityList";
 import {getNgoList} from "../services/getNgoList";
+import Hero from "@/components/donations/Hero.astro";
+import NgoList from "@/components/donations/NgoList";
 
 let activities: string[] = [];
 let ngo_s: NgoProps[] = [];
@@ -24,11 +26,6 @@ try {
 ---
 
 <Layout title="Dona a una causa">
-    <header>
-        <div>
-            <h1>Ayúdanos a hacer Venezuela Help accesible a todos.</h1>
-            <p>Apoya el desarrollo de esta plataforma para que más personas puedan contribuir al bienestar de Venezuela.</p>
-            <a href="https://ko-fi.com/venezuelahelp" target="_blank">Dona a Venezuela Help</a>
-        </div>
-    </header>
+    <Hero/>
+    <NgoList client:load type={type} ngo_s={ngo_s}/>
 </Layout>

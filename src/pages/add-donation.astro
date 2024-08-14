@@ -34,7 +34,12 @@ const ngo_types = [
     'animales',
     'medicina y primeros auxilios',
     'goFundMe',
-    'alimentación'
+    'alimentación',
+    'derechos lgbt',
+    'protección infantil',
+    'derechos de la mujer',
+    'educación',
+    'desarrollo comunitario'
 ]
 
 ---
@@ -48,10 +53,10 @@ const ngo_types = [
         <label for="description">Descripción:</label>
         <Input type="text" id="description" name="description" required/>
         <div class="select-container relative flex flex-col gap-1">
-            <label>Actividad</label>
+            <label for="type">Actividad</label>
             <select
-                    name="region"
-                    id="region"
+                    name="type"
+                    id="type"
                     class="cursor-pointer border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize appearance-none"
                     required
             >
