@@ -7,6 +7,7 @@ type CardProps = {
 };
 
 const Card = ({ ngo }: CardProps) => {
+    console.log(ngo.picture)
   const [isExpanded, setIsExpanded] = useState(false);
   const [needsClamping, setNeedsClamping] = useState(false);
   const contentRef = useRef(null) as React.RefObject<HTMLDivElement>;
@@ -22,17 +23,14 @@ const Card = ({ ngo }: CardProps) => {
   return (
     <div class="w-64 flex flex-col justify-center">
       <img
-        src={ngo.picture}
+        src={ngo.picture ?? (ngo.type === 'goFundMe' ? '/gofundme_logo.svg' : 'default-ngo.svg')}
         alt={ngo.name}
         class="mx-auto overflow-hidden rounded-full"
       />
-      <p
-        title={ngo.name}
-        className="capitalize text-center text-xl text-pretty font-bold select-none line-clamp-2 md:text-lg xl:text-xl"
-      >
+      <h3 className="text-center text-xl text-pretty font-bold select-none line-clamp-2 md:text-lg xl:text-xl" >
         {ngo.name}
-      </p>
-    <span class="capitalize text-center select-none text-custom-red">{ngo.type}</span>
+      </h3>
+      <span class="capitalize text-center select-none text-custom-red">{ngo.type}</span>
       <div className="flex-grow max-w-xs mx-auto text-center overflow-hidden md:max-w-2xl">
         <div className="p-2">
           <p
