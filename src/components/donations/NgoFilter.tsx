@@ -1,22 +1,22 @@
 import { useState } from "preact/hooks";
-import type { ContactProps } from "@/interfaces/contact.interface";
-import Card from "@/components/home/Card.tsx";
+import Card from "@/components/donations/Card.tsx";
 import { useMemo } from "preact/hooks";
+import type {NgoProps} from "@/interfaces/ngo.interface.ts";
 
-type ContactFilterProps = {
-  contacts: ContactProps[];
+type NgoFilterProps = {
+  ngo_s: NgoProps[];
 };
 
-const ContactFilter = ({ contacts }: ContactFilterProps) => {
+const NgoFilter = ({ ngo_s }: NgoFilterProps) => {
   const [filter, setFilter] = useState<string | null>(null);
 
   const options = useMemo(() => {
-    return [...new Map(contacts.map((item) => [item.service, item])).values()];
-  }, [contacts]);
+    return [...new Map(ngo_s.map((item) => [item.type, item])).values()];
+  }, [ngo_s]);
 
   return (
     <>
-      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[16px] items-center">
+      <div class="flex flex-col md:flex-row justify-center gap-[30px] my-[30px] text-[16px] items-center flex-wrap">
         <button
           onClick={() => setFilter(null)}
           class={`py-2 px-4 rounded-2xl cursor-pointer ${
@@ -25,29 +25,29 @@ const ContactFilter = ({ contacts }: ContactFilterProps) => {
         >
           Todos
         </button>
-        {options.map(({ service }) => (
+        {options.map(({ type }) => (
           <>
             <hr class="h-9 w-[1px] border-l border-gray-700 hidden md:block" />
             <button
-              onClick={() => setFilter(service)}
+              onClick={() => setFilter(type)}
               class={`hover:bg-gray-200 transition-shadow duration-150 py-2 px-7 rounded-2xl cursor-pointer capitalize ${
-                filter === service && "bg-gray-200 text-black"
+                filter === type && "bg-gray-200 text-black"
               }`}
             >
-              {service}
+              {type}
             </button>
           </>
         ))}
       </div>
       <div class="grid gap-10 mt-16 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:mt-24 md:gap-16">
-        {contacts
-          .filter(({ service }) => service === filter || filter === null)
-          .map((contact) => (
-            <Card contact={contact} />
+        {ngo_s
+          .filter(({ type }) => type === filter || filter === null)
+          .map((ngo) => (
+            <Card ngo={ngo} />
           ))}
       </div>
     </>
   );
 };
 
-export default ContactFilter;
+export default NgoFilter;

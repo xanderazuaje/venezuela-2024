@@ -4,6 +4,7 @@ import Input from "@/components/UI/Input.astro";
 import { regions, services } from "@/constants/form";
 import "intl-tel-input/build/css/intlTelInput.css";
 import LayoutRecatcha from "@/layouts/LayoutRecatcha.astro";
+import Button from "../components/UI/Button.astro";
 ---
 
 <script>
@@ -159,11 +160,12 @@ import LayoutRecatcha from "@/layouts/LayoutRecatcha.astro";
               class="resize-none border rounded-xl px-4 border-\[\#C1C1C1\] py-3"
             ></textarea>
           </div>
-          <button
+          <Button
             type="submit"
             class="bg-custom-red text-white hover:bg-custom-red font-semibold py-2 px-4 rounded-xl mt-3"
-            >Enviar</button
-          >
+            >
+              Enviar
+          </Button>
         </form>
       </div>
       <img src="/form_image.webp" class="w-1/2 object-cover hidden md:block" />

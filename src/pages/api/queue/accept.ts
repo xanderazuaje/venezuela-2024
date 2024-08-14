@@ -3,8 +3,10 @@ import {supabase} from "@/lib/supabase.ts";
 
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
-        const {id, name, email, service, region, phone, description, social} = await request.json();
         const {data} = await supabase.auth.getSession()
+        if (!data?.session?.user)
+            return new Response(JSON.stringify({message: "forbidden", status: 403}))
+        const {id, name, email, service, region, phone, description, social} = await request.json();
         const {error: errorAdd} = await supabase
             .from("Contact")
             .insert({
@@ -15,7 +17,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
                 phone,
                 description,
                 social,
-                created_by: data.session?.user})
+                created_by: data.session.user?.email})
         if (errorAdd)
             return new Response(JSON.stringify({message: errorAdd.message, status: 500}))
         const {error: errorDel} = await supabase.from("Contact_queue").delete().eq("id", id)

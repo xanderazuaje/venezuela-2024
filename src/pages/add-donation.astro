@@ -1,0 +1,109 @@
+---
+
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "@/lib/supabase";
+import Input from "../components/UI/Input.astro";
+import Button from "../components/UI/Button.astro";
+
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (!accessToken || !refreshToken) {
+    return Astro.redirect("/signin");
+}
+
+const { error } = await supabase.auth.setSession({
+    refresh_token: refreshToken.value,
+    access_token: accessToken.value,
+});
+
+if (error) {
+    cookies.delete("sb-access-token", {
+        path: "/",
+    });
+    cookies.delete("sb-refresh-token", {
+        path: "/",
+    });
+
+    return redirect("/signin");
+}
+
+const ngo_types = [
+    'animales',
+    'medicina y primeros auxilios',
+    'goFundMe',
+    'alimentación',
+    'derechos lgbt',
+    'protección infantil',
+    'derechos de la mujer',
+    'educación',
+    'desarrollo comunitario'
+]
+
+---
+<Layout title="Añadir ONG">
+    <h1 class="mb-14 font-bold text-5xl text-center">Añadir ONG para donaciones</h1>
+    <form action="/api/donations/create" method="post" id="donationForm" enctype="multipart/form-data" class="flex flex-col gap-4">
+        <label for="name">Nombre:</label>
+        <Input type="text" id="name" name="name" placeholder="Nombre aquí" required/>
+        <label for="url">URL:</label>
+        <Input type="url" id="url" name="url" placeholder="https://ejemplo.com" required/>
+        <label for="description">Descripción:</label>
+        <Input type="text" id="description" name="description" required/>
+        <div class="select-container relative flex flex-col gap-1">
+            <label for="type">Actividad</label>
+            <select
+                    name="type"
+                    id="type"
+                    class="cursor-pointer border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize appearance-none"
+                    required
+            >
+                {ngo_types.map((e) => <option value={e}>{e}</option>)}
+            </select>
+        </div>
+        <label for="picture">Añadir imagen:</label>
+        <Input type="file" id="picture" name="picture" placeholder="Subir imagen" accept="image/*"/>
+        <Button type="submit" className="mt-3">
+            Enviar
+        </Button>
+    </form>
+</Layout>
+
+<script>
+    const file = document.getElementById("file") as HTMLInputElement
+    file.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement
+        const alertMsg = document.getElementById('alertMsg')
+        if (target.files && target.files[0].size > 2 * (1024 ** 2))
+        {
+            target.value = ''
+            if (!alertMsg)
+            {
+                const alertMsg = document.createElement('span')
+                alertMsg.id = 'alertMsg'
+                alertMsg.className = 'text-custom-red'
+                alertMsg.innerText = 'Archivo demasiado grande'
+                target.parentNode?.insertBefore(alertMsg, target.nextSibling)
+            }
+            return
+        }
+        alertMsg?.remove()
+    })
+</script>
+
+<style>
+    .select-container::after {
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        content: "";
+        transform: rotate(-180deg);
+        right: 0.8rem;
+        top: 2.3rem;
+        background-image: url("/arrow.svg");
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
+</style>
