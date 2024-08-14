@@ -4,7 +4,7 @@ export interface NavbarAnchorProps {
     text: string
 }
 
-const {href, text}: NavbarAnchorProps = Astro.props
+const {href, text} = Astro.props as NavbarAnchorProps
 
 const location = Astro.url.pathname
 ---

@@ -5,16 +5,16 @@ import { supabase } from "@/lib/supabase";
 import Input from "../components/UI/Input.astro";
 import Button from "../components/UI/Button.astro";
 
-const { cookies, redirect } = Astro;
+const { cookies } = Astro;
 
 const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
 if (!accessToken || !refreshToken) {
-    return redirect("/signin");
+    return Astro.redirect("/signin");
 }
 
-const { data, error } = await supabase.auth.setSession({
+const { error } = await supabase.auth.setSession({
     refresh_token: refreshToken.value,
     access_token: accessToken.value,
 });
@@ -78,18 +78,18 @@ const ngo_types = [
         const alertMsg = document.getElementById('alertMsg')
         if (target.files && target.files[0].size > 2 * (1024 ** 2))
         {
-            target.value = null
+            target.value = ''
             if (!alertMsg)
             {
                 const alertMsg = document.createElement('span')
                 alertMsg.id = 'alertMsg'
                 alertMsg.className = 'text-custom-red'
                 alertMsg.innerText = 'Archivo demasiado grande'
-                target.parentNode.insertBefore(alertMsg, target.nextSibling)
+                target.parentNode?.insertBefore(alertMsg, target.nextSibling)
             }
             return
         }
-        alertMsg.remove()
+        alertMsg?.remove()
     })
 </script>
 

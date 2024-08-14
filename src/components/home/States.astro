@@ -4,7 +4,7 @@ type StatesProps = {
   reg: string | null;
 };
 
-const { regions, reg } = Astro.props;
+const { regions, reg } = Astro.props as StatesProps;
 ---
 <section class="w-full">
   <h2 class="font-semibold text-2xl mb-5">
