@@ -24,13 +24,14 @@ const reject = async (data: RowDashboardProps) => {
 }
 
 const RowDashboard = ({data}: {data: RowDashboardProps}) => {
+    console.log(data)
     const [clicked, setClicked] = useState(false)
     return (
-        <div class={`bg-[${clicked ? "#D00B27" : "#ECECEC"}] ${clicked ? "text-white" : ""} text-center py-8 px-4 rounded-2xl`} onClick={() => {
+        <div class={`${clicked ? "bg-custom-red" : "bg-[#ECECEC]"} ${clicked ? "text-white" : ""} text-center py-8 px-4 rounded-2xl`} onClick={() => {
             setClicked(!clicked)
         }}>
             <div class={`${!clicked ? "grid-cols-5" : "grid-cols-6"} grid items-center`}>
-                <p>{data.id}</p>
+                <p>{new Date(data.created_at).toLocaleDateString("es-VE")}</p>
                 <p>{data.name}</p>
                 <p>{data.region}</p>
                 <p>{data.phone}</p>
@@ -43,11 +44,11 @@ const RowDashboard = ({data}: {data: RowDashboardProps}) => {
                 }
             </div>
             {clicked &&
-                <div class="bg-white text-[#080808] w-full text-left mt-5">
-                    <p>Descripción: {data.description}</p>
-                    {data.social?.instagram && <p>{"Instagram: " + data.social?.instagram}</p>}
-                    {data.social?.telegram && <p>{"Telegram: " + data.social?.telegram}</p>}
-                    {data.social?.whatsapp && <p>{"Whatsapp: " + data.social?.whatsapp}</p>}
+                <div class="bg-white text-[#080808] w-full text-left mt-5 p-5 rounded-2xl">
+                    <p><b>Descripción:</b> {data.description}</p>
+                    {data.social?.instagram && <p><b>Instagram:</b> {data.social?.instagram}</p>}
+                    {data.social?.telegram && <p><b>Telegram:</b> {data.social?.telegram}</p>}
+                    {data.social?.whatsapp && <p><b>Whatsapp:</b> {data.social?.whatsapp}</p>}
                 </div>
             }
         </div>

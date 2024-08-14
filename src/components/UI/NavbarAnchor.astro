@@ -1,0 +1,31 @@
+---
+export interface NavbarAnchorProps {
+    href: string,
+    text: string
+}
+
+const {href, text} = Astro.props as NavbarAnchorProps
+
+const location = Astro.url.pathname
+---
+<li class="block">
+    <a
+        href={href} class=`hover:text-custom-red block
+        ${location === href && 'text-custom-red'}`
+    >
+        {text}
+    </a>
+    <hr class="md:hidden "/>
+</li>
+
+<style>
+    li:nth-last-child(1) > hr {
+        display: none;
+    }
+    li:nth-last-child(1) {
+        border: 2px black solid;
+        padding: 5px 20px;
+        border-radius: 20px;
+        text-align: center;
+    }
+</style>

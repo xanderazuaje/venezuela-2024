@@ -1,4 +1,4 @@
-import type { ContactProps } from "@/interfaces/contact.interface";
+import type { ContactProps } from "@/interfaces/contact.interface.ts";
 import type React from "preact/compat";
 import { useEffect, useRef, useState } from "preact/hooks";
 
