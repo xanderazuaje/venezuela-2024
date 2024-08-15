@@ -1,10 +1,10 @@
 import type {APIRoute} from "astro";
 import {supabase} from "@/lib/supabase";
 import {uploadImage} from "@/utils/uploadImage.ts";
-import sharp from "sharp";
 
-const bucketName = import.meta.env.SUPABASE_DONATIONS_BUCKET
+// const bucketName = import.meta.env.SUPABASE_DONATIONS_BUCKET
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
         const {data} = await supabase.auth.getSession()
@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
         if (error)
             return new Response(JSON.stringify({message: error.message, status: 400}))
         return redirect("/success")
-    }  catch (error: any) {
-        return new Response(JSON.stringify({message: error.message, status: 500}))
+    }  catch (error: unknown) {
+        return new Response(JSON.stringify({message: (error as Error).message, status: 500}))
     }
 };

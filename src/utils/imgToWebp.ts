@@ -10,7 +10,8 @@ export async function imgToWebp(imageFile: Blob): Promise<Buffer> {
                 height: 200,
             })
             .toBuffer();
-    } catch (error) {
+    } catch (error: unknown) {
+        console.error((error as Error).message);
         throw new Error('Failed to convert image to WebP format');
     }
 }
