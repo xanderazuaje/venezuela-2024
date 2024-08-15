@@ -1,8 +1,7 @@
-// With `output: 'hybrid'` configured:
-// export const prerender = false;
 import type { APIRoute } from "astro";
 import { supabase } from "@/lib/supabase";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
         const formData = await request.formData();
@@ -26,7 +25,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
             return new Response(JSON.stringify({message: error.message, status: 400}))
         }
         return redirect("/success")
-    }  catch (error: any) {
-        return new Response(JSON.stringify({message: error.message, status: 500}))
+    }  catch (error: unknown) {
+        return new Response(JSON.stringify({message: (error as Error).message, status: 500}))
     }
 };

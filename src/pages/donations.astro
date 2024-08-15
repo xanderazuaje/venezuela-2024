@@ -1,31 +1,31 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import type {NgoProps} from "../interfaces/ngo.interface";
-import {sortNgo} from "../utils/sortNgo";
-import {getActivityList} from "../services/getActivityList";
-import {getNgoList} from "../services/getNgoList";
-import Hero from "@/components/donations/Hero.astro";
-import NgoList from "@/components/donations/NgoList";
+import Layout from '../layouts/Layout.astro';
+import type { NgoProps } from '../interfaces/ngo.interface';
+// import {sortNgo} from "../utils/sortNgo";
+// import {getActivityList} from "../services/getActivityList";
+import { getNgoList } from '../services/getNgoList';
+import Hero from '@/components/donations/Hero.astro';
+import NgoList from '@/components/donations/NgoList';
 
-let activities: string[] = [];
+// let activities: string[] = [];
 let ngo_s: NgoProps[] = [];
-const type = Astro.url.searchParams.get("filter") ?? null;
+const type = Astro.url.searchParams.get('filter') ?? null;
 
 try {
-    const ngos_arr = await getActivityList();
-    activities = [...new Set(sortNgo(ngos_arr).map((e) => e.type))];
+  // const ngos_arr = await getActivityList();
+  // activities = [...new Set(sortNgo(ngos_arr).map((e) => e.type))];
 } catch (error) {
-    console.error("Error fetching region list: ", (error as unknown as Error).message);
+  console.error('Error fetching region list: ', (error as unknown as Error).message);
 }
 
 try {
-    ngo_s = await getNgoList(type);
+  ngo_s = await getNgoList(type);
 } catch (error) {
-    console.error("Error fetching contact list: ", (error as unknown as Error).message);
+  console.error('Error fetching contact list: ', (error as unknown as Error).message);
 }
 ---
 
-<Layout title="Dona a una causa">
-    <Hero/>
-    <NgoList client:load type={type} ngo_s={ngo_s}/>
+<Layout title='Dona a una causa'>
+  <Hero />
+  <NgoList client:load type={type} ngo_s={ngo_s} />
 </Layout>

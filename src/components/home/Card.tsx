@@ -1,6 +1,6 @@
-import type { ContactProps } from "@/interfaces/contact.interface.ts";
-import type React from "preact/compat";
-import { useEffect, useRef, useState } from "preact/hooks";
+import type { ContactProps } from '@/interfaces/contact.interface.ts';
+import type React from 'preact/compat';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 type CardProps = {
   contact: ContactProps;
@@ -19,82 +19,59 @@ const Card = ({ contact }: CardProps) => {
     }
   }, []);
 
-  const formatPhone = (phone: string) =>
-    phone.charAt(0) === "+" ? phone : "+" + phone;
+  const formatPhone = (phone: string) => (phone.charAt(0) === '+' ? phone : '+' + phone);
 
   return (
-    <div class="w-64 flex flex-col justify-center">
-      <img
-        src={`/${contact.service}.svg`}
-        alt={contact.service}
-        class="w-14 mx-auto"
-      />
-      <p class="capitalize text-center select-none">{contact.region}</p>
+    <div class='flex w-64 flex-col justify-center'>
+      <img src={`/${contact.service}.svg`} alt={contact.service} class='mx-auto w-14' />
+      <p class='select-none text-center capitalize'>{contact.region}</p>
       <p
         title={contact.name}
-        className="capitalize text-center text-xl text-pretty font-bold select-none line-clamp-2 md:text-lg xl:text-xl"
+        className='line-clamp-2 select-none text-pretty text-center text-xl font-bold capitalize md:text-lg xl:text-xl'
       >
         {contact.name}
       </p>
 
       <a
-        rel="noreferrer"
+        rel='noreferrer'
         title={`Contactar al ${formatPhone(contact.phone)}`}
         href={`tel:${formatPhone(contact.phone)}`}
-        className="text-custom-red text-center underline font-bold my-2"
+        className='my-2 text-center font-bold text-custom-red underline'
       >
         <span>{formatPhone(contact.phone)}</span>
       </a>
 
-      <div class="flex gap-6 items-center justify-center mt-2">
+      <div class='mt-2 flex items-center justify-center gap-6'>
         <a
-          rel="noreferrer"
+          rel='noreferrer'
           title={`Contactar al ${formatPhone(contact.phone)}`}
           href={`tel:${formatPhone(contact.phone)}`}
-          className="text-custom-red w-10 h-10 flex items-center border border-gray-300 
-          justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
+          className='flex h-10 w-10 items-center justify-center rounded-full border 
+          border-gray-300 bg-gray-200 p-2 text-custom-red transition-colors duration-200 hover:bg-gray-300'
         >
-          <img
-            width={20}
-            height={20}
-            src="/phone.svg"
-            alt="numero de telefono"
-            className={"pointer-events-none"}
-          />
+          <img width={20} height={20} src='/phone.svg' alt='numero de telefono' className={'pointer-events-none'} />
         </a>
         <a
-          title="Escribir al Whatsapp"
-          className="w-10 h-10 flex items-center justify-center border border-gray-300 p-2 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 transition-colors duration-200"
+          title='Escribir al Whatsapp'
+          className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-gray-300 bg-gray-200 p-2 transition-colors duration-200 hover:bg-gray-300'
           href={`https://api.whatsapp.com/send?phone=${formatPhone(
             contact.phone
           )}&text=Hola%20necesito%20su%20ayuda%20por%20favor`}
-          target="_blank"
-          rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
         >
-          <img
-            className="pointer-events-none"
-            src="/whatsapp.svg"
-            width={20}
-            height={20}
-            alt="whatsapp"
-          />
+          <img className='pointer-events-none' src='/whatsapp.svg' width={20} height={20} alt='whatsapp' />
         </a>
       </div>
 
-      <div className="flex-grow max-w-xs mx-auto text-center overflow-hidden md:max-w-2xl">
-        <div className="p-2">
-          <div
-            ref={contentRef}
-            className={`text-pretty text-sm ${!isExpanded && "line-clamp-3"}`}
-          >
+      <div className='mx-auto max-w-xs flex-grow overflow-hidden text-center md:max-w-2xl'>
+        <div className='p-2'>
+          <div ref={contentRef} className={`text-pretty text-sm ${!isExpanded && 'line-clamp-3'}`}>
             {contact.description}
           </div>
           {needsClamping && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-custom-red mx-auto cursor-pointer"
-            >
-              {isExpanded ? "Ver menos" : "Ver más"}
+            <button onClick={() => setIsExpanded(!isExpanded)} className='mx-auto cursor-pointer text-custom-red'>
+              {isExpanded ? 'Ver menos' : 'Ver más'}
             </button>
           )}
         </div>
