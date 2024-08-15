@@ -1,6 +1,7 @@
 import type {APIRoute} from "astro";
 import {supabase} from "@/lib/supabase.ts";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
         const {data} = await supabase.auth.getSession()
@@ -12,7 +13,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
             return new Response(JSON.stringify({message: errorDel.message, status: 400}))
         return redirect("/dashboard");
     }
-    catch (error: any) {
-        return new Response(JSON.stringify({message: error.message, status: 500}))
+    catch (error: unknown) {
+        return new Response(JSON.stringify({message: (error as Error).message, status: 500}))
     }
 };

@@ -1,0 +1,17 @@
+# Ignorar el directorio node_modules
+node_modules/
+
+# Ignorar el directorio de compilación (dist, build, etc.)
+dist/
+build/
+
+# Ignorar archivos específicos
+*.min.js
+*.bundle.js
+
+# Ignorar archivos de configuración de otros linters
+.prettierrc
+.stylelintrc
+
+# Ignorar carpetas de pruebas
+tests/

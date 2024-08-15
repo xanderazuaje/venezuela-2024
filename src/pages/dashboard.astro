@@ -1,47 +1,45 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import RowDashboard from "../components/RowDashboard";
-import { supabase } from "@/lib/supabase";
+import Layout from '../layouts/Layout.astro';
+import RowDashboard from '../components/RowDashboard';
+import { supabase } from '@/lib/supabase';
 
 const { cookies } = Astro;
 
-const accessToken = cookies.get("sb-access-token");
-const refreshToken = cookies.get("sb-refresh-token");
+const accessToken = cookies.get('sb-access-token');
+const refreshToken = cookies.get('sb-refresh-token');
 
 if (!accessToken || !refreshToken) {
-    return Astro.redirect("/signin");
+  return Astro.redirect('/signin');
 }
 
 const { error } = await supabase.auth.setSession({
-    refresh_token: refreshToken.value,
-    access_token: accessToken.value,
+  refresh_token: refreshToken.value,
+  access_token: accessToken.value,
 });
 
 if (error) {
-    cookies.delete("sb-access-token", {
-        path: "/",
-    });
-    cookies.delete("sb-refresh-token", {
-        path: "/",
-    });
+  cookies.delete('sb-access-token', {
+    path: '/',
+  });
+  cookies.delete('sb-refresh-token', {
+    path: '/',
+  });
 
-    return redirect("/signin");
+  return redirect('/signin');
 }
-const queue = (await supabase.from("Contact_queue").select())["data"];
+const queue = (await supabase.from('Contact_queue').select())['data'];
 ---
 
-<Layout title="Dashboard">
-    <h1 class="mb-14 font-bold text-5xl text-center">Dashboard</h1>
-    <div class="flex flex-col gap-6">
-        <div class="bg-[#ECECEC] font-bold grid-cols-5 grid text-center py-8 px-4 rounded-2xl">
-            <p>Fecha</p>
-            <p>Nombre</p>
-            <p>Estado</p>
-            <p>Telf.</p>
-            <p>Servicio</p>
-        </div>
-        {queue?.map((e) => (
-            <RowDashboard data={e} client:only="preact"/>
-        ))}
+<Layout title='Dashboard'>
+  <h1 class='mb-14 text-center text-5xl font-bold'>Dashboard</h1>
+  <div class='flex flex-col gap-6'>
+    <div class='grid grid-cols-5 rounded-2xl bg-[#ECECEC] px-4 py-8 text-center font-bold'>
+      <p>Fecha</p>
+      <p>Nombre</p>
+      <p>Estado</p>
+      <p>Telf.</p>
+      <p>Servicio</p>
     </div>
+    {queue?.map((e) => <RowDashboard data={e} client:only='preact' />)}
+  </div>
 </Layout>
