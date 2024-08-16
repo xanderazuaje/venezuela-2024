@@ -1,4 +1,4 @@
-import { customPlaceholders } from '@/constants/inputPhone';
+import { customPlaceholders } from '@/constants/phoneNumber';
 import { Iti } from 'intl-tel-input';
 
 export const updatePlaceholder = (input: HTMLInputElement, iti: Iti) => {
