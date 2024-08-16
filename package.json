@@ -1,14 +1,13 @@
 {
   "name": "venezuela-help-2024",
   "type": "module",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "astro": "astro",
     "lint": "eslint ."
-
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
