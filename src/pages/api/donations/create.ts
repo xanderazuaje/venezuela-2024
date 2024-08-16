@@ -2,8 +2,6 @@ import type {APIRoute} from "astro";
 import {supabase} from "@/lib/supabase";
 import {uploadImage} from "@/utils/uploadImage.ts";
 
-// const bucketName = import.meta.env.SUPABASE_DONATIONS_BUCKET
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
