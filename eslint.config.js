@@ -12,4 +12,15 @@ export default [
       // "astro/no-set-html-directive": "error"
     },
   },
+  {
+    ignores: [
+      'node_modules/',
+      'dist/',
+      'coverage/',
+      '*.min.js',
+      'public/**',
+      'tests/**',
+      '.prettierrc',
+    ],
+  },
 ];

@@ -1,4 +1,4 @@
-const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+import { RECAPTCHA_SITE_KEY } from "@/config";
 
 export const handleSubmit = (e: SubmitEvent) => {
   e.preventDefault();

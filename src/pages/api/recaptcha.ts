@@ -1,3 +1,5 @@
+import { RECAPTCHA_SEACRET_KEY } from "@/config";
+
 export const prerender = false;
 
 export async function POST({ request }: { request: Request }) {
@@ -5,7 +7,7 @@ export async function POST({ request }: { request: Request }) {
 
   const recaptchaURL = "https://www.google.com/recaptcha/api/siteverify";
   const requestBody = `secret=${
-    import.meta.env.RECAPTCHA_SEACRET_KEY
+    RECAPTCHA_SEACRET_KEY
   }&response=${data.token}`;
 
   const response = await fetch(recaptchaURL, {
