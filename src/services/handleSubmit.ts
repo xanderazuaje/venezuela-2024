@@ -1,6 +1,6 @@
 import { RECAPTCHA_SITE_KEY } from "@/config";
 
-export const handleSubmit = (e: SubmitEvent) => {
+export const handleSubmit = (e: SubmitEvent, route: string) => {
   e.preventDefault();
   grecaptcha.ready(function () {
     grecaptcha
@@ -21,7 +21,7 @@ export const handleSubmit = (e: SubmitEvent) => {
 
           if (data.score >= 0.5) {
             const formData = new FormData(form);
-            await fetch("/api/register", {
+            await fetch(route, {
               method: "POST",
               body: formData,
             });

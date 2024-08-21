@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Input from '@/components/UI/Input.astro';
-import { regions, services } from '@/constants/form';
+import { regions } from '@/constants/form';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import LayoutRecatcha from '@/layouts/LayoutRecatcha.astro';
 import Button from '../components/UI/Button.astro';
@@ -29,16 +29,16 @@ import Button from '../components/UI/Button.astro';
             <Input type="file" id="photos" name="photos" placeholder="Subir imagen" accept="image/*" multiple="multiple"/>
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='phone'
-            >Teléfono de contacto</label
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='reachContact'
+            >Teléfono de contacto para dar información</label
             >
-            <Input id='phone' type='tel' name='phone' minLength='10' maxLength='15' required/>
+            <Input id='reachContact' type='tel' name='reachContact' minLength='10' maxLength='15' required/>
           </div>
           <div class='select-container relative flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']">Estado</label>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for="missingPersonState">Estado</label>
             <select
-              name='region'
-              id='region'
+              name='missingPersonState'
+              id='missingPersonState'
               class='cursor-pointer appearance-none rounded-xl border border-[#C1C1C1] px-4 py-2 capitalize'
               required
             >
@@ -82,14 +82,18 @@ import Button from '../components/UI/Button.astro';
             <Input type='text' name='eyesColor' id='eyesColor'/>
           </div>
           <div class='flex flex-col gap-1'>
+            <label class="select-none font-semibold" for='distinctives'>Otros rasgos distintivos</label>
+            <Input type='text' name='distinctives' id='distinctives'/>
+          </div>
+          <div class='flex flex-col gap-1'>
             <label class="select-none font-semibold" for='lastSeenClothes'>Vestimenta previa a desaparecer</label>
             <Input type='text' name='lastSeenClothes' id='lastSeenClothes'/>
           </div>
           <div class='flex flex-col gap-1'>
-            <label class='select-none font-semibold' for='description'>Más información</label>
+            <label class='select-none font-semibold' for='moreInfo'>Más información</label>
             <textarea
-              name='description'
-              id='description'
+              name='moreInfo'
+              id='moreInfo'
               placeholder='Añade más información que consideres necesaria, i.e. redes sociales, números, otros dispositivos...'
               class='border-\[\#C1C1C1\] resize-none rounded-xl border px-4 py-3'></textarea>
           </div>
@@ -113,7 +117,7 @@ import Button from '../components/UI/Button.astro';
 
   const form = document.getElementById('astro-form');
   const photos = document.getElementById("photos") as HTMLInputElement
-  const phone = document.getElementById('phone') as HTMLInputElement;
+  const phone = document.getElementById('reachContact') as HTMLInputElement;
 
   const itiPhone = intlTelInput(phone, {
     utilsScript: 'path/to/utils.js',
@@ -155,7 +159,7 @@ import Button from '../components/UI/Button.astro';
 
   window.addEventListener('load', () => updatePlaceholder(phone, itiPhone));
 
-  if (form) form.addEventListener('submit', handleSubmit);
+  if (form) form.addEventListener('submit', (e) => handleSubmit(e, '/api/missing'));
 
 </script>
 
