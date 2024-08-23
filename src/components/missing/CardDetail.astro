@@ -9,7 +9,7 @@ const { depend , bold} = Astro.props;
 
 {
   depend && (
-    <span class=`text-[#838383] ${bold ? 'font-bold' : ''}`>
+    <span class=`text-[#838383] ${bold ? 'font-bold' : ''} block`>
       <slot />
     </span>
   )

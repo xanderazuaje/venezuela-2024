@@ -18,7 +18,7 @@ const { data: missingPeople } = await supabase.from('Missing').select('*');
   </header>
   <hr />
   <span class='text-xl my-10 block'>Desaparecidos recientes:</span>
-  <main class='grid grid-cols-3 gap-5'>
+  <main class='grid sm:grid-cols-3 gap-5'>
     {missingPeople?.map((e: Missing) => <MissingCard data={e} />)}
   </main>
 </Layout>
