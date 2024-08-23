@@ -7,8 +7,13 @@ type UploadedImage = {
   publicUrl: string;
 };
 
-export async function uploadImage(imageFile: Blob, bucket: string): Promise<UploadedImage> {
-  const webpImg = await imgToWebp(imageFile, 200, 200);
+export async function uploadImage(
+  imageFile: Blob,
+  bucket: string,
+  imgConfig: { width: number; height: number },
+): Promise<UploadedImage> {
+  const { width, height } = imgConfig;
+  const webpImg = await imgToWebp(imageFile, width, height);
   const path = `public/${uuidv4()}.webp`;
   const { data, error } = await supabase.storage.from(bucket).upload(path, webpImg, {
     contentType: 'image/webp',

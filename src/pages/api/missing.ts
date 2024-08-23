@@ -8,7 +8,11 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     const formData = await request.formData();
     const imgs = formData.getAll('photos') as File[];
     const imgs_arr = imgs
-      ? await Promise.all(imgs.map(async (photo: Blob) => await uploadImage(photo, SUPABASE_MISSING_BUCKET)))
+      ? await Promise.all(
+          imgs.map(
+            async (photo: Blob) => await uploadImage(photo, SUPABASE_MISSING_BUCKET, { width: 400, height: 600 }),
+          ),
+        )
       : null;
     const req = {
       first_name: formData.get('firstName'),
