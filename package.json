@@ -1,26 +1,37 @@
 {
   "name": "venezuela-help-2024",
   "type": "module",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
-    "@astrojs/cloudflare": "^11.0.1",
     "@astrojs/netlify": "^5.4.0",
     "@astrojs/preact": "^3.5.1",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/inter": "^5.0.19",
     "@supabase/supabase-js": "^2.45.0",
+    "@types/grecaptcha": "^3.0.9",
     "astro": "^4.12.3",
     "dotenv": "^16.4.5",
-    "intl-tel-input": "^23.8.1",
+    "globals": "^15.9.0",
+    "intl-tel-input": "^23.8.0",
     "preact": "^10.23.1",
+    "sharp": "^0.33.4",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.1.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-astro": "^1.2.3",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.1.0"
   }
 }

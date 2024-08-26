@@ -1,0 +1,27 @@
+<div class='more-info-container'>
+  <button
+    class='w-full more-info-button bg-custom-red text-white py-2 px-4 rounded-md hover:bg-[#B00920] transition-colors my-2'
+    aria-expanded='false'
+  >
+    Más información
+  </button>
+  <div class='more-info-content hidden'>
+    <slot />
+  </div>
+</div>
+
+<script>
+  const containers = document.querySelectorAll('.more-info-container');
+
+  containers.forEach((container) => {
+    const button = container.querySelector('.more-info-button');
+    const content = container.querySelector('.more-info-content');
+
+    if (button && content) {
+      button.addEventListener('click', () => {
+        content.classList.toggle('hidden');
+        button.textContent = content?.classList.contains('hidden') ? 'Más información' : 'Menos información';
+      });
+    }
+  });
+</script>

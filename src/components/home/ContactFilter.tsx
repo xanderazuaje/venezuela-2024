@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
 import type { ContactProps } from "@/interfaces/contact.interface";
-import Card from "@/components/UI/Card";
+import Card from "@/components/home/Card.tsx";
 import { useMemo } from "preact/hooks";
 
 type ContactFilterProps = {

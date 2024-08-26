@@ -9,5 +9,6 @@ export interface RowDashboardProps {
         telegram: string,
         instagram: string,
         whatsapp: string
-    }
+    },
+    created_at: string
 }

@@ -1,21 +1,51 @@
 ---
-const {title} = Astro.props
-import "@/index.css";
-import "@fontsource/inter"
-import "@fontsource/inter/800.css"
+import Navbar from '../components/UI/Navbar.astro';
+const { title } = Astro.props;
+import '@/index.css';
+import '@fontsource/inter';
+import '@fontsource/inter/800.css';
+import Footer from '../components/home/Footer.astro';
 ---
 
-<html lang="es">
+<html lang='es'>
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/logo-reduced.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- M E T A S  S E O  -->
+    <meta name='application-name' content='Venezuela Help' />
+    <meta name='description' content='Toda la ayuda que necesitas en un solo lugar 🇻🇪, Venezuela.' />
+    <meta
+      name='keywords'
+      content='Venezuela, Donaciones, Ayuda, Venezuela Help, Movimiento libertario, Contactos,
+    Desaparecidos'
+    />
+    <meta name='author' content='Venezuela Help' />
+    <meta name='copyright' content='Venezuela Help' />
+    <meta name='language' content='es' />
+    <meta name='twitter:card' content='summary' />
+    <meta name='twitter:site' content='@venezuelahelp' />
+    <meta property='og:type' content='website' />
+    <meta name='twitter:title' property='og:title' content='Venezuela Help' />
+    <meta
+      name='twitter:description'
+      property='og:description'
+      content='Toda la ayuda que necesitas en un solo lugar 🇻🇪'
+    />
+    <meta property='og:url' content='https://venezuelahelp.org/' />
+    <meta property='twitter:url' content='https://venezuelahelp.org/' />
+    <meta property='og:image' content='/logo-reduced.png' />
+    <meta name='twitter:image' content='/logo-reduced.png' />
+    <link rel='canonical' href='https://venezuelahelp.org/' />
   </head>
   <body>
-    <div class="max-w-screen-lg m-auto p-[20px] md:p-[60px] overflow-hidden">
+    <Navbar />
+    <div class='m-auto max-w-screen-lg overflow-hidden p-[20px] md:p-[60px]'>
       <slot />
     </div>
+    <Footer />
   </body>
 </html>

@@ -1,0 +1,14 @@
+---
+import Button from "@/components/UI/Button.astro"
+---
+<header class="w-full flex items-end flex-col gap-6 md:flex-row">
+    <div class="flex flex-col gap-6">
+        <h1 class="font-bold text-5xl">Ayúdanos a hacer Venezuela Help accesible a todos.</h1>
+        <p class="text-xl">Apoya el desarrollo de esta plataforma para que más personas puedan contribuir al bienestar de Venezuela.</p>
+        <Button href="https://ko-fi.com/venezuelahelp" target="_blank" className="w-fit">
+            Dona a Venezuela Help
+        </Button>
+        <span class="text-sm text-[#838383]">Tu donación nos ayudará a mantener esta web activa y conectando a más personas con las ONGs que necesitan</span>
+    </div>
+    <img src="/hero-donation.svg" alt="" class="scale-125 mt-6 md:scale-100 w-[120%]"/>
+</header>

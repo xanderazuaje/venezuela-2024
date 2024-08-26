@@ -1,0 +1,43 @@
+---
+import NavbarAnchor from "./NavbarAnchor.astro";
+
+const isAdminLogged = () => {
+    const { cookies } = Astro;
+
+    const accessToken = cookies.get("sb-access-token");
+    const refreshToken = cookies.get("sb-refresh-token");
+
+    return !!(accessToken && refreshToken);
+}
+
+---
+<nav class="max-w-screen-lg m-auto p-5 flex items-center justify-between relative">
+    <a href="/" class="w-16 block">
+        <img src="/logo-reduced.svg" alt="">
+    </a>
+    <label for="menuBtn" class="w-10 md:hidden">
+        <img src="/menu-btn.svg" alt="Abrir menu">
+    </label>
+    <input type="checkbox" id="menuBtn" class="hidden"/>
+    <div class=" p-5 pt-0 absolute w-full bg-white z-20 translate-y-[100%] bottom-0 left-0 hidden md:block md:relative md:translate-y-0 md:items-center md:p-0 md:justify-between md:w-fit" id="anchors">
+        <ul class="font-bold flex flex-col gap-5 md:flex-row md:items-center">
+            {isAdminLogged() && (
+                    <>
+                        <NavbarAnchor href="/dashboard" text="Dashboard" />
+                        <NavbarAnchor href="/add-donation" text="Añadir donativos" />
+                    </>
+            )}
+            <NavbarAnchor href="/" text="Emergencias" />
+            <NavbarAnchor href="/donations" text="Donaciones" />
+            <NavbarAnchor href="/missing" text="Desaparecidos" />
+            <NavbarAnchor href="/form" text="¿Eres profesional u ONG?" />
+        </ul>
+    </div>
+</nav>
+
+<style>
+    #menuBtn:checked + #anchors {
+        display: block;
+    }
+</style>
+

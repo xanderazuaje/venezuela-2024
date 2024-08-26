@@ -1,0 +1,27 @@
+---
+export interface Props {
+  href?: string;
+  className?: string;
+  type?: 'submit' | 'reset' | 'button';
+  target?: string;
+  kind?: 'primary' | 'secondary';
+  full?: boolean;
+}
+const { href, type, className, target, kind = 'primary', full = false } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  class={'block' +
+    (full ? 'w-full ' : 'w-fit ') +
+    (kind === 'primary'
+      ? 'bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl '
+      : kind === 'secondary'
+        ? 'bg-white font-semibold py-2 px-4 rounded-xl border-2 border-black '
+        : '') +
+    className ?? ''}
+  target={target}
+>
+  <slot />
+</Tag>

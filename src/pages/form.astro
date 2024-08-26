@@ -1,156 +1,142 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Input from "@/components/UI/Input.astro";
-import { regions, services } from "@/constants/form";
-import "intl-tel-input/build/css/intlTelInput.css";
+import Layout from '@/layouts/Layout.astro';
+import Input from '@/components/UI/Input.astro';
+import { regions, services } from '@/constants/form';
+import 'intl-tel-input/build/css/intlTelInput.css';
+import LayoutRecatcha from '@/layouts/LayoutRecatcha.astro';
+import Button from '../components/UI/Button.astro';
 ---
 
 <script>
-  import intlTelInput from "intl-tel-input";
-  import { customPlaceholders } from "@/constants/inputPhone";
-  const input = document.querySelector("#phone") as HTMLInputElement;
-  const iti = intlTelInput(input, {
-    utilsScript: "path/to/utils.js",
-    initialCountry: "ve",
+  import { handleSubmit } from '@/services/handleSubmit';
+  import { updatePlaceholder } from '@/services/updatePlaceholder';
+  import intlTelInput from 'intl-tel-input';
+  const input = document.getElementById('phone') as HTMLInputElement;
+  const whats = document.getElementById('whatsapp') as HTMLInputElement;
+  const form = document.getElementById('astro-form');
+
+  const itiPhone = intlTelInput(input, {
+    utilsScript: 'path/to/utils.js',
+    initialCountry: 've',
     strictMode: true,
   });
 
-  const updatePlaceholder = () => {
-    const countryData = iti.getSelectedCountryData();
+  const itiWhatsapp = intlTelInput(whats, {
+    utilsScript: 'path/to/utils.js',
+    initialCountry: 've',
+    strictMode: true,
+  });
 
-    const fullNumber =
-      customPlaceholders[
-        countryData.iso2?.toUpperCase() as keyof typeof customPlaceholders
-      ];
+  input.addEventListener('countrychange', () => updatePlaceholder(input, itiPhone));
 
-    input.setAttribute("placeholder", `+${countryData.dialCode}${fullNumber}`);
-  };
-  input.addEventListener("countrychange", updatePlaceholder);
+  whats.addEventListener('countrychange', () => updatePlaceholder(whats, itiWhatsapp));
 
-  window.addEventListener("load", updatePlaceholder);
+  window.addEventListener('load', () => updatePlaceholder(input, itiPhone));
+
+  window.addEventListener('load', () => updatePlaceholder(whats, itiWhatsapp));
+
+  if (form) form.addEventListener('submit', (e) => handleSubmit(e, '/api/register'));
 </script>
 
-<Layout title="Registra tu apoyo">
-  <div>
-    <a href="/" class="underline text-gray-500 md:text-lg hover:text-gray-700"
-      >Volver al Inicio</a
-    >
-    <p class="font-extrabold text-center text-gray-900 m-8 md:text-2xl">
-      Bienvenido.<br />Gracias a ti, Venezuela es un mejor país
-    </p>
-  </div>
-  <div class="md:flex rounded-sm overflow-hidden text-gray-900">
-    <div class="p-10 border border-gray-500">
-      <h1 class="text-center text-1xl mb-5 font-extrabold xl:text-2xl">
-        Formulario de inscripción a Venezuela Help
-      </h1>
-      <form action="/api/register" method="post" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="name">Nombre Completo</label>
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Por defecto: [ANÓNIMO]"
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="email">Email</label>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="tucorreo@dominio.com"
-            required
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label
-            class="font-semibold after:content-['*'] after:text-custom-red"
-            for="phone">Número de teléfono</label
-          >
-          <Input type="tel" name="phone" id="phone" />
-        </div>
-        <div class="icon-arrow relative flex flex-col gap-1">
-          <label class="font-semibold" for="region">Estado</label>
-          <select
-            name="region"
-            id="region"
-            class="cursor-pointer border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize appearance-none"
-          >
-            {regions.map((e) => <option value={e}>{e}</option>)}
-          </select>
-        </div>
-        <div class="icon-arrow relative flex flex-col gap-1">
-          <label class="font-semibold" for="service">Servicio</label>
-          <select
-            name="service"
-            id="service"
-            class="cursor-pointer border-[#C1C1C1] border rounded-xl py-2 px-4 capitalize appearance-none"
-          >
-            {services.map((e) => <option value={e}>{e}</option>)}
-          </select>
-        </div>
-        <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="instagram">Instagram</label>
-          <Input
-            type="text"
-            name="instagram"
-            id="instagram"
-            placeholder="Ejemplo: tuusuario.sinarroba"
-          />
-        </div>
+<Layout title='Registra tu apoyo'>
+  <LayoutRecatcha>
+    <div>
+      <a href='/' class='text-gray-500 underline hover:text-gray-700 md:text-lg'>Volver al Inicio</a>
+      <p class='m-8 text-center font-extrabold text-gray-900 md:text-2xl'>
+        Bienvenido.<br />Gracias a ti, Venezuela es un mejor país
+      </p>
+    </div>
+    <div class='overflow-hidden rounded-sm text-gray-900 md:flex'>
+      <div class='border border-gray-500 p-10'>
+        <h1 class='text-1xl mb-5 text-center font-extrabold xl:text-2xl'>Formulario de inscripción a Venezuela Help</h1>
+        <form id='astro-form' class='flex flex-col gap-4'>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='name'>Nombre Completo</label>
+            <Input type='text' name='name' id='name' placeholder='Por defecto: [ANÓNIMO]' />
+          </div>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='email'>Email</label>
+            <Input
+              type='email'
+              name='email'
+              id='email'
+              pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
+              placeholder='tucorreo@dominio.com'
+              required
+            />
+          </div>
+          <div class='flex flex-col gap-1'>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='phone'
+              >Número de teléfono</label
+            >
+            <Input id='phone' type='tel' name='phone' minLength='10' maxLength='15' />
+          </div>
+          <div class='select-container relative flex flex-col gap-1'>
+            <label class='select-none font-semibold'>Estado</label>
+            <select
+              name='region'
+              id='region'
+              class='cursor-pointer appearance-none rounded-xl border border-[#C1C1C1] px-4 py-2 capitalize'
+            >
+              {regions.map((e) => <option value={e}>{e}</option>)}
+            </select>
+          </div>
+          <div class='select-container relative flex flex-col gap-1'>
+            <label class='font-semibold'>Servicio</label>
+            <select
+              name='service'
+              id='service'
+              class='cursor-pointer appearance-none rounded-xl border border-[#C1C1C1] px-4 py-2 capitalize'
+            >
+              {services.map((e) => <option value={e}>{e}</option>)}
+            </select>
+          </div>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='instagram'>Instagram</label>
+            <Input type='text' name='instagram' id='instagram' placeholder='Ejemplo: tuusuario.sinarroba' />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="telegram">Telegram</label>
-          <Input
-            type="text"
-            name="telegram"
-            id="telegram"
-            placeholder="Ejemplo: tuusuario.sinarroba"
-          />
-        </div>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='telegram'>Telegram</label>
+            <Input type='text' name='telegram' id='telegram' placeholder='Ejemplo: tuusuario.sinarroba' />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="font-semibold" for="whatsapp">WhatsApp</label>
-          <Input
-            type="text"
-            name="whatsapp"
-            id="whatsapp"
-            placeholder="Ejemplo: +581234567"
-          />
-        </div>
-             <div class="flex flex-col gap-1">
-                    <label class="font-semibold" for="description">Descripción</label>
-                    <textarea name="description" id="description" placeholder="Explica cómo es tu servicio y cómo puedes ayudar." class="resize-none border border rounded-xl px-4 border-\[\#C1C1C1\] py-3"></textarea>
-                </div>
-         <button
-          type="submit"
-          class="bg-custom-red text-white hover:bg-[#B00920] font-semibold py-2 px-4 rounded-xl mt-3"
-          >Enviar</button
-        >
-            </form>
-        </div>
-    <img src="/form_image.webp" class="w-1/2 object-cover hidden md:block" />
-  </div>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='whatsapp'>WhatsApp</label>
+            <Input type='tel' name='whatsapp' id='whatsapp' minLength='10' maxLength='15' />
+          </div>
+          <div class='flex flex-col gap-1'>
+            <label class='select-none font-semibold' for='description'>Descripción</label>
+            <textarea
+              name='description'
+              id='description'
+              placeholder='Explica cómo es tu servicio y cómo puedes ayudar.'
+              class='border-\[\#C1C1C1\] resize-none rounded-xl border px-4 py-3'></textarea>
+          </div>
+          <Button
+            type='submit'
+            class='mt-3 rounded-xl bg-custom-red px-4 py-2 font-semibold text-white hover:bg-custom-red'
+          >
+            Enviar
+          </Button>
+        </form>
+      </div>
+      <img src='/form_image.webp' class='hidden w-1/2 object-cover md:block' />
+    </div>
+  </LayoutRecatcha>
 </Layout>
 
 <style>
-  .icon-arrow::after {
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  content: "";
-  transform: rotate(-180deg);
-  right: 0.8rem;
-  top: 2.3rem;
-  background-image: url("./public/arrow.svg");
-  background-repeat: no-repeat;
-  pointer-events: none;
-  transition: 225ms transform ease-in-out;
-}
-
-.icon-arrow:focus-within::after {
-  transform: rotate(0);
-}
+  .select-container::after {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    content: '';
+    transform: rotate(-180deg);
+    right: 0.8rem;
+    top: 2.3rem;
+    background-image: url('/arrow.svg');
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
 </style>
