@@ -37,8 +37,8 @@ const {
     Publicado: {new Date(created_at).toLocaleDateString('es-VE')}
   </span>
   
-  <Carousel images={recent_pics} altText={`${first_name} ${last_name}`} />
-  
+  <Carousel images={recent_pics} altText={`${first_name} ${last_name}`}/>
+
   <div class='flex items-center justify-between'>
     <div class='flex items-center gap-2'>
       {had_been_found ? <GreenDot /> : <RedDot />}
