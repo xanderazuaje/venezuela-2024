@@ -1,13 +1,14 @@
 import sharp from "sharp";
 
-export async function imgToWebp(imageFile: Blob): Promise<Buffer> {
+export async function imgToWebp(imageFile: Blob, width: number, height: number): Promise<Buffer> {
     try {
         const buffer = Buffer.from(await imageFile.arrayBuffer());
         return await sharp(buffer)
+            .withMetadata()
             .webp({quality: 80})
             .resize({
-                width: 200,
-                height: 200,
+                width,
+                height,
             })
             .toBuffer();
     } catch (error: unknown) {

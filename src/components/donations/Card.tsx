@@ -7,7 +7,6 @@ type CardProps = {
 };
 
 const Card = ({ ngo }: CardProps) => {
-    console.log(ngo.picture)
   const [isExpanded, setIsExpanded] = useState(false);
   const [needsClamping, setNeedsClamping] = useState(false);
   const contentRef = useRef(null) as React.RefObject<HTMLDivElement>;

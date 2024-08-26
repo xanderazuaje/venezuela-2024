@@ -1,26 +1,34 @@
-import {imgToWebp} from "@/utils/imgToWebp.ts";
-import {uuidv4} from "@/utils/uuidv4.ts";
-import {supabase} from "@/lib/supabase.ts";
-import {SUPABASE_DONATIONS_BUCKET} from "@/config";
+import { imgToWebp } from '@/utils/imgToWebp.ts';
+import { uuidv4 } from '@/utils/uuidv4.ts';
+import { supabase } from '@/lib/supabase.ts';
 
-export async function uploadImage(imageFile: Blob) {
-    const webpImg = await imgToWebp(imageFile);
-    const path = `public/${uuidv4()}.webp`;
-    const {data, error} = await supabase
-        .storage
-        .from(SUPABASE_DONATIONS_BUCKET)
-        .upload(path, webpImg, {
-            contentType: 'image/webp',
-        });
+type UploadedImage = {
+  path: string;
+  publicUrl: string;
+};
 
-    if (error) {
-        throw new Error(`Error uploading file: ${error.message}`);
-    }
+export async function uploadImage(
+  imageFile: Blob,
+  bucket: string,
+  imgConfig: { width: number; height: number },
+): Promise<UploadedImage> {
+  const { width, height } = imgConfig;
+  const webpImg = await imgToWebp(imageFile, width, height);
+  const path = `public/${uuidv4()}.webp`;
+  const { data, error } = await supabase.storage.from(bucket).upload(path, webpImg, {
+    contentType: 'image/webp',
+  });
 
-    const {data: {publicUrl}} = supabase
-        .storage
-        .from(SUPABASE_DONATIONS_BUCKET)
-        .getPublicUrl(data?.path);
+  if (error) {
+    throw new Error(`Error uploading file: ${error.message}`);
+  }
 
-    return publicUrl;
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from(bucket).getPublicUrl(data?.path);
+
+  return {
+    path,
+    publicUrl,
+  };
 }

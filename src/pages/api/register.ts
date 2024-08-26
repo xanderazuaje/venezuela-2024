@@ -1,8 +1,7 @@
 import type { APIRoute } from "astro";
 import { supabase } from "@/lib/supabase";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const POST: APIRoute = async ({ request, cookies, redirect }) => {
+export const POST: APIRoute = async ({ request, redirect }) => {
     try {
         const formData = await request.formData();
         const req = {

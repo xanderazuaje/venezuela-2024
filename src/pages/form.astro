@@ -35,7 +35,7 @@ import Button from '../components/UI/Button.astro';
 
   window.addEventListener('load', () => updatePlaceholder(whats, itiWhatsapp));
 
-  if (form) form.addEventListener('submit', handleSubmit);
+  if (form) form.addEventListener('submit', (e) => handleSubmit(e, '/api/register'));
 </script>
 
 <Layout title='Registra tu apoyo'>
