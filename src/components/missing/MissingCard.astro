@@ -34,10 +34,9 @@ const {
   <span class='text-xl text-[#838383]'>
     Publicado: {new Date(created_at).toLocaleDateString('es-VE')}
   </span>
-
   <div class="relative">
     <div data-slider={id} class="flex overflow-hidden snap-mandatory snap-x scroll-smooth gap-5">
-      {recent_pics.map((e) => <img src={e} alt={`${first_name} ${last_name}`} class="w-full h-auto object-cover snap-start"/>)}
+      {recent_pics.map((e) => <img src={e} alt={`${first_name} ${last_name}`} class="object-cover snap-start"/>)}
     </div>
     {recent_pics.length > 1 && (
       <div>
