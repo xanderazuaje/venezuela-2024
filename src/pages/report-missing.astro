@@ -17,25 +17,40 @@ import Button from '../components/UI/Button.astro';
         <h1 class='text-1xl mb-5 text-center font-extrabold xl:text-2xl'>Formulario para la publicación de personas desaparecidas en Venezuela</h1>
         <form id='astro-form' class='flex flex-col gap-4'>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='firstName'>Nombres</label>
-            <Input type='text' name='firstName' id='firstName' placeholder='Nombres' required/>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='firstName'
+              >Nombres</label
+            >
+            <Input type='text' name='firstName' id='firstName' placeholder='Nombres' required />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastName'>Apellidos</label>
-            <Input type='text' name='lastName' id='lastName' placeholder='Apellidos' required/>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastName'
+              >Apellidos</label
+            >
+            <Input type='text' name='lastName' id='lastName' placeholder='Apellidos' required />
           </div>
           <div>
-            <label for="photos" class="select-none font-semibold after:text-custom-red after:content-['*']">Añadir imagen: (10 máx.)</label>
-            <Input type="file" id="photos" name="photos" placeholder="Subir imagen" accept="image/*" multiple="multiple"/>
+            <label for='photos' class="select-none font-semibold after:text-custom-red after:content-['*']"
+              >Añadir imagen: (10 máx.)</label
+            >
+            <Input
+              type='file'
+              id='photos'
+              name='photos'
+              placeholder='Subir imagen'
+              accept='image/*'
+              multiple='multiple'
+            />
           </div>
           <div class='flex flex-col gap-1'>
             <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='reachContact'
-            >Teléfono de contacto para dar información</label
+              >Teléfono de contacto para dar información</label
             >
-            <Input id='reachContact' type='tel' name='reachContact' minLength='10' maxLength='15' required/>
+            <Input id='reachContact' type='tel' name='reachContact' minLength='10' maxLength='15' required />
           </div>
           <div class='select-container relative flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for="missingPersonState">Estado</label>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='missingPersonState'
+              >Estado</label
+            >
             <select
               name='missingPersonState'
               id='missingPersonState'
@@ -46,19 +61,29 @@ import Button from '../components/UI/Button.astro';
             </select>
           </div>
           <div class='relative flex flex-col gap-1'>
-            <label class='font-semibold' for="age">Edad</label>
-            <Input id="age" type="number" name="age" value="0" min="0"/>
+            <label class='font-semibold' for='age'>Edad</label>
+            <Input id='age' type='number' name='age' value='0' min='0' />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastSeenDate'>Última vez que se le vio</label>
-            <Input type='date' name='lastSeenDate' id='lastSeenDate' required/>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastSeenDate'
+              >Última vez que se le vio</label
+            >
+            <Input type='date' name='lastSeenDate' id='lastSeenDate' required />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastSeenPlace'>Último sitio en que se vio</label>
-            <Input type='text' name='lastSeenPlace' id='lastSeenPlace' placeholder='Calle o avenida donde se le vio por última vez' required/>
+            <label class="select-none font-semibold after:text-custom-red after:content-['*']" for='lastSeenPlace'
+              >Último sitio en que se vio</label
+            >
+            <Input
+              type='text'
+              name='lastSeenPlace'
+              id='lastSeenPlace'
+              placeholder='Calle o avenida donde se le vio por última vez'
+              required
+            />
           </div>
           <div class='select-container relative flex flex-col gap-1'>
-            <label class="select-none font-semibold" for='gender'>Género</label>
+            <label class='select-none font-semibold' for='gender'>Género</label>
             <select
               name='gender'
               id='gender'
@@ -70,24 +95,24 @@ import Button from '../components/UI/Button.astro';
             </select>
           </div>
           <div class='relative flex flex-col gap-1'>
-            <label class='font-semibold' for="height">Altura</label>
-            <Input id="height" type="number" name="height" value="0" step="0.01" min="0"/>
+            <label class='font-semibold' for='height'>Altura</label>
+            <Input id='height' type='number' name='height' value='0' step='0.01' min='0' />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold" for='hairColor'>Color de cabello</label>
-            <Input type='text' name='hairColor' id='hairColor'/>
+            <label class='select-none font-semibold' for='hairColor'>Color de cabello</label>
+            <Input type='text' name='hairColor' id='hairColor' />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold" for='eyesColor'>Color de ojos</label>
-            <Input type='text' name='eyesColor' id='eyesColor'/>
+            <label class='select-none font-semibold' for='eyesColor'>Color de ojos</label>
+            <Input type='text' name='eyesColor' id='eyesColor' />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold" for='distinctives'>Otros rasgos distintivos</label>
-            <Input type='text' name='distinctives' id='distinctives'/>
+            <label class='select-none font-semibold' for='distinctives'>Otros rasgos distintivos</label>
+            <Input type='text' name='distinctives' id='distinctives' />
           </div>
           <div class='flex flex-col gap-1'>
-            <label class="select-none font-semibold" for='lastSeenClothes'>Vestimenta previa a desaparecer</label>
-            <Input type='text' name='lastSeenClothes' id='lastSeenClothes'/>
+            <label class='select-none font-semibold' for='lastSeenClothes'>Vestimenta previa a desaparecer</label>
+            <Input type='text' name='lastSeenClothes' id='lastSeenClothes' />
           </div>
           <div class='flex flex-col gap-1'>
             <label class='select-none font-semibold' for='moreInfo'>Más información</label>
@@ -99,7 +124,7 @@ import Button from '../components/UI/Button.astro';
           </div>
           <Button
             type='submit'
-            class='mt-3 rounded-xl bg-custom-red px-4 py-2 font-semibold text-white hover:bg-custom-red'
+            className='mt-3 rounded-xl bg-custom-red px-4 py-2 font-semibold text-white hover:bg-custom-red'
           >
             Enviar
           </Button>
@@ -116,7 +141,7 @@ import Button from '../components/UI/Button.astro';
   import intlTelInput from 'intl-tel-input';
 
   const form = document.getElementById('astro-form');
-  const photos = document.getElementById("photos") as HTMLInputElement
+  const photos = document.getElementById('photos') as HTMLInputElement;
   const phone = document.getElementById('reachContact') as HTMLInputElement;
 
   const itiPhone = intlTelInput(phone, {
@@ -125,55 +150,50 @@ import Button from '../components/UI/Button.astro';
     strictMode: true,
   });
 
-
-  if (photos) photos.addEventListener('change', (e) => {
-    const target = e.target as HTMLInputElement
-    const alertMsg = document.getElementsByClassName('alertMsg')
-    Array.from(alertMsg).forEach((e) => e.remove())
-    const dataTransfer = new DataTransfer()
-    Array.from(target.files as FileList).forEach((file, i) => {
-      if (dataTransfer.files.length >= 10)
-      {
-        const alertMsg = document.createElement('span')
-        alertMsg.className = 'text-custom-red block alertMsg'
-        alertMsg.innerText = 'No se ha subido: ' + file.name + ', máximo 10 imágenes'
-        target.parentNode?.insertBefore(alertMsg, target.nextSibling)
-        return
-      }
-      if (file.size > 2 * (1024 ** 2))
-      {
-        const alertMsg = document.createElement('span')
-        alertMsg.className = 'text-custom-red block alertMsg'
-        alertMsg.innerText = 'Archivo demasiado grande: ' + file.name
-        target.parentNode?.insertBefore(alertMsg, target.nextSibling)
-      }
-      else
-      {
-        dataTransfer.items.add(file)
-      }
-    })
-    target.files = dataTransfer.files
-  })
+  if (photos)
+    photos.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      const alertMsg = document.getElementsByClassName('alertMsg');
+      Array.from(alertMsg).forEach((e) => e.remove());
+      const dataTransfer = new DataTransfer();
+      Array.from(target.files as FileList).forEach((file) => {
+        if (dataTransfer.files.length >= 10) {
+          const alertMsg = document.createElement('span');
+          alertMsg.className = 'text-custom-red block alertMsg';
+          alertMsg.innerText = 'No se ha subido: ' + file.name + ', máximo 10 imágenes';
+          target.parentNode?.insertBefore(alertMsg, target.nextSibling);
+          return;
+        }
+        if (file.size > 2 * 1024 ** 2) {
+          const alertMsg = document.createElement('span');
+          alertMsg.className = 'text-custom-red block alertMsg';
+          alertMsg.innerText = 'Archivo demasiado grande: ' + file.name;
+          target.parentNode?.insertBefore(alertMsg, target.nextSibling);
+        } else {
+          dataTransfer.items.add(file);
+        }
+      });
+      target.files = dataTransfer.files;
+    });
 
   phone.addEventListener('countrychange', () => updatePlaceholder(phone, itiPhone));
 
   window.addEventListener('load', () => updatePlaceholder(phone, itiPhone));
 
   if (form) form.addEventListener('submit', (e) => handleSubmit(e, '/api/missing'));
-
 </script>
 
 <style>
-    .select-container::after {
-        position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
-        content: '';
-        transform: rotate(-180deg);
-        right: 0.8rem;
-        top: 2.3rem;
-        background-image: url('/arrow.svg');
-        background-repeat: no-repeat;
-        pointer-events: none;
-    }
+  .select-container::after {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    content: '';
+    transform: rotate(-180deg);
+    right: 0.8rem;
+    top: 2.3rem;
+    background-image: url('/arrow.svg');
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
 </style>
