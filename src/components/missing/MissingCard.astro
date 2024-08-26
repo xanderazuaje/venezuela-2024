@@ -6,6 +6,7 @@ import CardDetail from './CardDetail.astro';
 export interface Props {
   data: Missing;
 }
+
 const {
   data: {
     id,
@@ -29,14 +30,27 @@ const {
   },
 } = Astro.props;
 ---
-
 <div class='flex flex-col gap-2.5'>
   <span class='text-xl text-[#838383]'>
     Publicado: {new Date(created_at).toLocaleDateString('es-VE')}
   </span>
-  <div class='flex overflow-scroll snap-mandatory snap-x scroll-smooth gap-5'>
-    {recent_pics.map((e) => <img src={e} alt='' class='rounded-2xl snap-start' />)}
+
+  <div class="relative">
+    <div data-slider={id} class="flex overflow-hidden snap-mandatory snap-x scroll-smooth gap-5">
+      {recent_pics.map((e) => <img src={e} alt={`${first_name} ${last_name}`} class="w-full h-auto object-cover snap-start"/>)}
+    </div>
+    {recent_pics.length > 1 && (
+      <div>
+        <button class="slider-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-colors">
+          &lt;
+        </button>
+        <button class="slider-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-colors">
+          &gt;
+        </button>
+      </div>
+    )}
   </div>
+  
   <div class='flex items-center justify-between'>
     <div class='flex items-center gap-2'>
       {had_been_found ? <GreenDot /> : <RedDot />}
@@ -46,6 +60,7 @@ const {
     </div>
     <span class='capitalize font-bold'>{missing_person_state}</span>
   </div>
+
   <span class='text-2xl font-bold'>
     {first_name}
     {last_name}
@@ -53,44 +68,55 @@ const {
   <CardDetail bold depend={age}>
     {age} años
   </CardDetail>
-  <CardDetail bold depend={height}>
-    Altura: {height} m.
-  </CardDetail>
-  <CardDetail depend={gender}>
-    <b>Género:</b>
-    {gender === 'male' ? 'Masculino' : gender === 'female' ? 'Femenino' : 'Otro'}
-  </CardDetail>
-  <CardDetail depend={eyes_color}>
-    <b>Color de ojos:</b>
-    {eyes_color}
-  </CardDetail>
-  <CardDetail depend={hair_color}>
-    <b>Color de cabello:</b>
-    {hair_color}
-  </CardDetail>
-  <CardDetail depend={distinctives}>
-    <b>Rasgos distintivos:</b>
-    {distinctives}
-  </CardDetail>
-  <CardDetail depend={last_seen_clothes}>
-    <b>Ropa con la que se le vio por última vez:</b>
-    {last_seen_clothes}
-  </CardDetail>
-  <CardDetail depend={last_seen_place}>
-    <b>Visto por última vez en:</b>
-    {last_seen_place}
-  </CardDetail>
   <CardDetail depend={more_info}>
-    <b>Más información:</b>
     {more_info}
   </CardDetail>
-  <span class=`font-bold ${had_been_found ? 'text-[#2C8B0B]' : 'text-custom-red'}`>
+
+  <button data-info-btn={id} class="bg-custom-red text-white py-2 px-4 rounded-md hover:bg-[#B00920] transition-colors mt-2">
+    Más Información
+  </button>
+  <div data-info={id} class="hidden space-y-2 flex-col">
+    <CardDetail depend={height}>
+      <b>Altura:</b>
+      {height} m.
+    </CardDetail>
+    <CardDetail depend={gender}>
+      <b>Género:</b>
+      {gender === 'male' ? 'Masculino' : gender === 'female' ? 'Femenino' : 'Otro'}
+    </CardDetail>
+    <CardDetail depend={eyes_color}>
+      <b>Color de ojos:</b>
+      {eyes_color}
+    </CardDetail>
+    <CardDetail depend={hair_color}>
+      <b>Color de cabello:</b>
+      {hair_color}
+    </CardDetail>
+    <CardDetail depend={distinctives}>
+      <b>Rasgos distintivos:</b>
+      {distinctives}
+    </CardDetail>
+    <CardDetail depend={last_seen_clothes}>
+      <b>Ropa con la que se le vio por última vez:</b>
+      {last_seen_clothes}
+    </CardDetail>
+    <CardDetail depend={last_seen_place}>
+      <b>Visto por última vez en:</b>
+      {last_seen_place}
+    </CardDetail>
+  </div>
+  <span class=`text-center mt-2 font-bold ${had_been_found ? 'text-[#2C8B0B]' : 'text-custom-red'}`>
     Última vez visto: {new Date(last_seen_date).toLocaleDateString('es-VE')}
   </span>
   {
     !had_been_found &&
-      <span class="font-bold text-lg">
+      <span class="font-bold text-lg text-center">
         Aporta información al: <a class="text-custom-red underline" href=`tel:${reach_contact}`>{reach_contact}</a>
       </span>
   }
 </div>
+
+<script>
+import { initializeComponents } from "./scripts/missingPersonCard";
+  document.addEventListener('DOMContentLoaded', initializeComponents)
+</script>
